@@ -10,7 +10,7 @@ import com.m2i.poec.twittergreen.entity.Tweet;
 
 @Stateless
 public class TweeterService {
-	
+
 	@PersistenceContext(unitName="TwitterGreenPU")
 	private EntityManager em;
 
@@ -19,11 +19,11 @@ public class TweeterService {
 		Tweet tweet = new Tweet();
 		tweet.setContent(content);
 		tweet.setDate_creation(creation_Date);
-		
+
 		User user = em.find(author_id, User.class);
-				
+
 		tweet.setAuthor(user);
-		
+
 		em.persist(tweet);
 	}
 }

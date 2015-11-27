@@ -17,17 +17,17 @@ public class Tweet {
 	@Column(name="idTweet")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@ManyToOne
 	@JoinColumn(name="idUser")
 	private User author;
-	
+
 	@Column(name="content")
 	private String content;
-	
+
 	@Column(name="date")
 	private Date date_creation;
-	
+
 	public Date getDate_creation() {
 		return date_creation;
 	}
@@ -59,7 +59,7 @@ public class Tweet {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Tweet[id = "+ id + "; author = " + author.username + "; content = " + content + "; date =" + date_creation.toString() + ";]";
