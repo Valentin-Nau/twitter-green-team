@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS `tweets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tweets` (
-  `idtweet` bigint(20) NOT NULL,
+  `idtweet` bigint(20) NOT NULL AUTO_INCREMENT,
   `iduser` bigint(20) NOT NULL,
   `content` varchar(140) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `iduser` bigint(20) NOT NULL,
+  `iduser` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
