@@ -59,9 +59,12 @@ public class Tweet {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Tweet[id = "+ id + "; author = " + author.username + "; content = " + content + "; date =" + date_creation.toString() + ";]";
+		return "Tweet [id=" + id + ", author=" + author + ", content=" + content + ", date_creation=" + date_creation
+				+ "]";
 	}
+	
+	
 }
