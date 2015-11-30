@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Tweet {
@@ -26,14 +28,15 @@ public class Tweet {
 	private String content;
 
 	@Column(name="date")
-	private Date date_creation;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date creationDate;
 
-	public Date getDate_creation() {
-		return date_creation;
+	public Date getCreationDate() {
+		return creationDate;
 	}
 
-	public void setDate_creation(Date date_creation) {
-		this.date_creation = date_creation;
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	public Long getId() {
@@ -62,7 +65,7 @@ public class Tweet {
 
 	@Override
 	public String toString() {
-		return "Tweet [id=" + id + ", author=" + author + ", content=" + content + ", date_creation=" + date_creation
+		return "Tweet [id=" + id + ", author=" + author + ", content=" + content + ", date_creation=" + creationDate
 				+ "]";
 	}
 	

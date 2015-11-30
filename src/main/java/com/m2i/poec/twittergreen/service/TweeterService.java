@@ -1,29 +1,27 @@
 package com.m2i.poec.twittergreen.service;
 
-import java.util.Date;
-
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.m2i.poec.twittergreen.bean.UserCreateBean;
 import com.m2i.poec.twittergreen.entity.Tweet;
 import com.m2i.poec.twittergreen.entity.User;
 
-@Stateless
+@Stateful
 public class TweeterService {
 
 	@PersistenceContext(unitName = "TwitterGreenPU")
 
 	private EntityManager em;
 
-	public void createTweet(Long author_id, String content, Date creation_Date) {
+	public void createTweet(Long authorId, String content) {
 
 		Tweet tweet = new Tweet();
 		tweet.setContent(content);
-		tweet.setDate_creation(creation_Date);
 
-		User user = em.find(User.class, author_id);
+
+		User user = em.find(User.class, authorId);
+
 
 		tweet.setAuthor(user);
 
