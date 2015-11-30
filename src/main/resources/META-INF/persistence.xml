@@ -2,15 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 	version="2.1">
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<persistence-unit name="SakilaPU">
-=======
-	<persistence-unit name="TwitterGreenDS">
->>>>>>> 60dd96dd3cc4196d7f94ed269c996cf59e8f331b
-=======
+
 	<persistence-unit name="TwitterGreenPU">
->>>>>>> bbe06a710090016276952cb29456d0cb2775d27c
+
 		<jta-data-source>java:jboss/datasources/TwitterGreenDS</jta-data-source>
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 	</persistence-unit>

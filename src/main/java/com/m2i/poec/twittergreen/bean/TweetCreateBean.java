@@ -9,8 +9,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.mindrot.jbcrypt.BCrypt;
-
 import com.m2i.poec.twittergreen.service.TweeterService;
 
 @RequestScoped
@@ -22,16 +20,16 @@ public class TweetCreateBean {
 	@Inject
 	private TweeterService tweetService;
 
-	private Long author_id;
+	private Long authorId = 1L;
 	private String content;
-	private Date creation_Date;
+	private Date creationDate;
 
-	public Long getAuthor_id() {
-		return author_id;
+	public Long getAuthorId() {
+		return authorId;
 	}
 
-	public void setAuthor_id(Long author_id) {
-		this.author_id = author_id;
+	public void setAuthorId(Long authorId) {
+		this.authorId = authorId;
 	}
 
 	public String getContent() {
@@ -42,25 +40,24 @@ public class TweetCreateBean {
 		this.content = content;
 	}
 
-	public Date getCreation_Date() {
-		return creation_Date;
+	public Date getCreationDate() {
+		return creationDate;
 	}
 
-	public void setCreation_Date(Date creation_Date) {
-		this.creation_Date = creation_Date;
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	public String createTweet() {
 
 		try {
-			tweetService.createTweet(author_id, content, creation_Date);
-			return ""; //TODO la redirection
+			tweetService.createTweet(authorId, content);
+			return "Profil";
 		} catch(EJBException ex) {
 
 			// TODO décortiquer l'exception, voir ou est l'erreur, préparer un message d'erreur adéquat
 			LOGGER.log(Level.INFO, "oups...", ex);
 			return null;
 		}
-	}
-
+	}	
 }

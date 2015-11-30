@@ -1,17 +1,11 @@
 package com.m2i.poec.twittergreen.bean;
 
-import java.util.Date;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.flow.builder.ReturnBuilder;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.Column;
-import javax.persistence.PersistenceException;
-
 import com.m2i.poec.twittergreen.service.TweeterService;
 
 @RequestScoped

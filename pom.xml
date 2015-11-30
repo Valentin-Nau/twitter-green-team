@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.m2i.poec.javjsf</groupId>
+	<groupId>com.m2i.poec.TwitterGreen</groupId>
 	<artifactId>TwitterGreen</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
@@ -122,19 +122,18 @@
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>5.3</version>
+			<scope>provided</scope>
 		</dependency>
-<<<<<<< HEAD
 		
-=======
 
 		<dependency>
 			<groupId>org.mindrot</groupId>
 			<artifactId>jbcrypt</artifactId>
 			<version>0.3m</version>
+			<scope>provided</scope>
 		</dependency>
 
 
->>>>>>> 3046c08c030d624343808b10af50aafd401fc09e
 	</dependencies>
 
 	<build>

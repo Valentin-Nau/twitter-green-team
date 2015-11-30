@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-Ctrl-C -- exit!
-=======
-<<<<<<< HEAD
+
 -- MySQL dump 10.13  Distrib 5.6.24, for Win32 (x86)
 --
 -- Host: 127.0.0.1    Database: twittergreendb
@@ -86,6 +83,3 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2015-11-27 15:11:25
-=======
->>>>>>> eeb56eddd1888cad08181f792bff780421d03e99
->>>>>>> 7267b77c8158d66918d7d275cd3ef6e382596422
