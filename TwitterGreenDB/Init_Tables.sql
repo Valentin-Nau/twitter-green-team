@@ -20,13 +20,13 @@
 use twittergreendb;
 
 --
--- Table structure for table `tweets`
+-- Table structure for table `tweet`
 --
 
-DROP TABLE IF EXISTS `tweets`;
+DROP TABLE IF EXISTS `tweet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tweets` (
+CREATE TABLE `tweet` (
   `idtweet` bigint(20) NOT NULL AUTO_INCREMENT,
   `iduser` bigint(20) NOT NULL,
   `content` varchar(140) NOT NULL,
@@ -36,22 +36,22 @@ CREATE TABLE `tweets` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tweets`
+-- Dumping data for table `tweet`
 --
 
-LOCK TABLES `tweets` WRITE;
-/*!40000 ALTER TABLE `tweets` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tweets` ENABLE KEYS */;
+LOCK TABLES `tweet` WRITE;
+/*!40000 ALTER TABLE `tweet` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tweet` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `users`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS "user";
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
+CREATE TABLE "user" (
   `iduser` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -61,16 +61,16 @@ CREATE TABLE `users` (
   UNIQUE KEY `iduser_UNIQUE` (`iduser`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table  des utilisateurs de tweets.';
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Table  des utilisateurs de tweet.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `user`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
