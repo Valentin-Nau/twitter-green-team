@@ -14,20 +14,20 @@ import javax.persistence.ManyToOne;
 public class Tweet {
 	//TODO ajouter les noms de colonnes correspondentes
 	@Id
-	@Column(name="idTweet")
+	@Column(name="idtweet")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="idUser")
+	@JoinColumn(name="iduser")
 	private User author;
-	
+
 	@Column(name="content")
 	private String content;
-	
+
 	@Column(name="date")
 	private Date date_creation;
-	
+
 	public Date getDate_creation() {
 		return date_creation;
 	}

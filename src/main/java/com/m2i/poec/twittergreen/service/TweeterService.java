@@ -12,7 +12,11 @@ import com.m2i.poec.twittergreen.entity.User;
 @Stateless
 public class TweeterService {
 
+<<<<<<< HEAD
 	@PersistenceContext(unitName = "TwitterGreenPU")
+=======
+	@PersistenceContext(unitName="TwitterGreenPU")
+>>>>>>> 3046c08c030d624343808b10af50aafd401fc09e
 	private EntityManager em;
 
 	public void createTweet(Long author_id, String content, Date creation_Date) {
@@ -21,7 +25,11 @@ public class TweeterService {
 		tweet.setContent(content);
 		tweet.setDate_creation(creation_Date);
 
+<<<<<<< HEAD
 		User user = em.find(User.class, author_id);
+=======
+		User user = em.find(author_id, User.class);
+>>>>>>> 3046c08c030d624343808b10af50aafd401fc09e
 
 		tweet.setAuthor(user);
 

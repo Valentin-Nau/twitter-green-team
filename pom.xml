@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.m2i.poec.javjsf</groupId>
-	<artifactId>javjsf</artifactId>
+	<artifactId>TwitterGreen</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name></name>
@@ -65,6 +65,13 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- Import the Common Annotations API (JSR-250), we use provided scope
 			as the API is included in JBoss WildFly -->
 		<dependency>
@@ -116,7 +123,18 @@
 			<artifactId>primefaces</artifactId>
 			<version>5.3</version>
 		</dependency>
+<<<<<<< HEAD
 		
+=======
+
+		<dependency>
+			<groupId>org.mindrot</groupId>
+			<artifactId>jbcrypt</artifactId>
+			<version>0.3m</version>
+		</dependency>
+
+
+>>>>>>> 3046c08c030d624343808b10af50aafd401fc09e
 	</dependencies>
 
 	<build>
