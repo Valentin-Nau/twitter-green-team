@@ -1,6 +1,5 @@
 package com.m2i.poec.twittergreen.bean;
 
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,17 +19,10 @@ public class TweetCreateBean {
 	@Inject
 	private TweeterService tweetService;
 
-	private Long authorId = 1L;
+	@Inject
+	private UserLoginBean userLoginBean;
+	
 	private String content;
-	private Date creationDate;
-
-	public Long getAuthorId() {
-		return authorId;
-	}
-
-	public void setAuthorId(Long authorId) {
-		this.authorId = authorId;
-	}
 
 	public String getContent() {
 		return content;
@@ -40,18 +32,10 @@ public class TweetCreateBean {
 		this.content = content;
 	}
 
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
 	public String createTweet() {
 
 		try {
-			tweetService.createTweet(authorId, content);
+			tweetService.createTweet(userLoginBean.getUser(), content);
 			return "Profil";
 		} catch(EJBException ex) {
 

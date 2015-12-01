@@ -97,7 +97,7 @@ public class UserCreateBean implements Serializable {
 		try {
 			validator.check(username, password, confirmPassword, email, picture);
 			tweetService.createUser(username, password, email, picture);
-			return "Login.xhtml";
+			return "Login.xhtml?faces-redirect=true";
 																	
 		} catch (Exception e) {
 			message.put("username", "username est vide");

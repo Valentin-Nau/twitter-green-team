@@ -3,7 +3,8 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:pf="http://primefaces.org/ui">
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 	<title>Profil</title>
 </h:head>
@@ -11,5 +12,11 @@
 	<h4>Test test test</h4>
 	<br />
 	<ui:include src="Tweet.xhtml" />
+	<c:forEach items="#{userLoginBean.user.tweets}" var="tweet">
+	<p>
+		#{userLoginBean.user.username} : #{tweet.creationDate} <br />
+		#{tweet.content }
+	</p>
+</c:forEach>
 </h:body>
 </html>
