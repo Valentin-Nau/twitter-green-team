@@ -8,7 +8,6 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class PasswordTreatment {
 
-	private BCrypt bCrypt;
 	private static int keyValue = 12;
 
 	/**
@@ -16,8 +15,8 @@ public class PasswordTreatment {
 	 * @param password
 	 * @return String
 	 */
-	public String cryptPassWord(String password){
-		return bCrypt.hashpw(password, BCrypt.gensalt(keyValue));
+	public static String cryptPassWord(String password){
+		return BCrypt.hashpw(password, BCrypt.gensalt(keyValue));
 	}
 
 	/**
@@ -26,8 +25,8 @@ public class PasswordTreatment {
 	 * @param passwordHashStored
 	 * @return Boolean
 	 */
-	public Boolean decryptPassword(String passwordEnter, String passwordHashStored){
-		return bCrypt.checkpw(passwordEnter, passwordHashStored);
+	public static Boolean decryptPassword(String passwordEnter, String passwordHashStored){
+		return BCrypt.checkpw(passwordEnter, passwordHashStored);
 	}
 
 }
