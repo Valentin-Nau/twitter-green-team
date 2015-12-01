@@ -1,10 +1,16 @@
 package com.m2i.poec.twittergreen.bean;
 
+import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.annotation.ManagedBean;
+import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.NoResultException;
+
+import com.m2i.poec.twittergreen.entity.User;
 import com.m2i.poec.twittergreen.exception.WrongPasswordException;
 import com.m2i.poec.twittergreen.service.TweeterService;
 import java.io.Serializable;
@@ -20,50 +26,38 @@ public class UserLoginBean implements Serializable {
 	@Inject
 	private TweeterService tweeterService;
 
-	private Long id;	
-	private String username;	
+	private User user;
+	
+	private String username;
 	private String password;
 	
 	private String errorName;
 	private String errorPass;
-	
-
-	public TweeterService getTweetService() {
-		return tweeterService;
-	}
-
-	public void setTweetService(TweeterService tweetService) {
-		this.tweeterService = tweetService;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public Long getId() {
-		return id;
+		
+	public String getPassword() {
+		return password;
 	}
 	
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public String getPassword() {
-		return password;
+
+	public String getUsername() {
+		return username;
 	}
 	
-	public static Logger getLogger() {
-		return LOGGER;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+		
 	public String getErrorName() {
 		return errorName;
 	}
@@ -82,10 +76,12 @@ public class UserLoginBean implements Serializable {
 	
 	public String logUser() {
 		try {
-			tweeterService.logUser(username, password);
+			errorName="";
+			errorPass="";
+			user = tweeterService.logUser(username, password);
 			return "Profil?faces-redirect=true";
 		}
-		catch (NoResultException e) {
+		catch (EJBException e) {
 			errorName = "Le nom d'utilisateur n'existe pas";
 			return "Login";
 		}
@@ -93,5 +89,14 @@ public class UserLoginBean implements Serializable {
 			errorPass = "Le mot de passe est incorrect";
 			return "Login";
 		}
+	}
+	
+	public String test(){
+		LOGGER.log(Level.INFO, "================== DEBUT DE TEST ==================");
+		List<User> users= tweeterService.findAllUsers();
+		LOGGER.info(users.toString());
+		tweeterService.createUser("test", "test", "test", "test");
+		LOGGER.info(users.toString());
+		return "NewFile";
 	}
 }

@@ -9,7 +9,7 @@ import org.mindrot.jbcrypt.BCrypt;
 public class PasswordTreatment {
 
 	private static int keyValue = 12;
-
+	
 	/**
 	 * Permit to crypt the password.
 	 * @param password

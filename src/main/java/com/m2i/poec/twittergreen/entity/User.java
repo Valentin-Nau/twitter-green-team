@@ -1,14 +1,17 @@
 package com.m2i.poec.twittergreen.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 @Entity
 public class User {
@@ -17,7 +20,8 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="author")
+	@OrderBy("creationDate DESC")
 	private List<Tweet> tweets;
 
 	@Column(name = "username")
@@ -82,10 +86,14 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", tweets=" + tweets + ", username=" + username + ", password=" + password
+		return "User [id=" + id + ", username=" + username + ", password=" + password
 				+ ", email=" + email + ", picture=" + picture + "]";
 	}
 
-	
-
+	public void addTweet(Tweet tweet) {
+		List<Tweet> newTweets = new ArrayList<Tweet>();
+		newTweets.add(tweet);
+		newTweets.addAll(tweets);
+		tweets = newTweets;
+	}
 }
