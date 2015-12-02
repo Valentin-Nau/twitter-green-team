@@ -12,7 +12,7 @@ import com.m2i.poec.twittergreen.bean.TweetCreateBean;
 import com.m2i.poec.twittergreen.entity.Tweet;
 import com.m2i.poec.twittergreen.entity.Users;
 import com.m2i.poec.twittergreen.exception.WrongPasswordException;
-import com.m2i.poec.twittergreen.password.PasswordBCrypt;
+import com.m2i.poec.twittergreen.security.PasswordBCrypt;
 
 @Stateless
 public class TweeterService {
@@ -35,11 +35,11 @@ public class TweeterService {
 		
 		user.addTweet(tweet);
 		
-		/*refreshUser(user);*/
 	}
 
 	public void createUser(String username, String password, String email, String picture) {
-		
+		Users user = new Users();
+
 		user.setEmail(email);
 		user.setPassword(PasswordBCrypt.cryptPassWord(password));
 		user.setPicture(picture);
@@ -52,17 +52,20 @@ public class TweeterService {
 	public Users logUser(String username, String password) throws NoResultException, WrongPasswordException {
 
 		Users user = em.createQuery("SELECT u "
-								 + "FROM User AS u "
+								 + "FROM Users AS u "
 								 + "INNER JOIN  u.tweets "
-
 								 + "WHERE username = :pusername", Users.class).setParameter("pusername", username).getSingleResult();
+				
+		if(!PasswordBCrypt.verifyPassword(password, user.getPassword())){
+			throw new WrongPasswordException();
 
-	
-			return user;
 		}
-	
-	
-	
+		else {
+			LOGGER.info("On s'est bien loggé");
+			return user;
+			}
+	}
+		
 	public List<Users> findAllUsers() {
 
 		return em.createQuery("SELECT DISTINCT u "

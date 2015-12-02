@@ -1,4 +1,4 @@
-package com.m2i.poec.twittergreen.password;
+package com.m2i.poec.twittergreen.security;
 
 import org.mindrot.jbcrypt.BCrypt;
 
