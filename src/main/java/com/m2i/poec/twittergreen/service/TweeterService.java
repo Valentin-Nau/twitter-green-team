@@ -19,7 +19,7 @@ public class TweeterService {
 
 	@PersistenceContext(unitName = "TwitterGreenPU")
 	private EntityManager em;
-	private Users user = new Users();
+
 	private static final Logger LOGGER = Logger.getLogger(TweetCreateBean.class.getName());
 	
 	public void createTweet(Users user, String content) {
@@ -38,15 +38,14 @@ public class TweeterService {
 	}
 
 	public void createUser(String username, String password, String email, String picture) {
-		Users user = new Users();
 
+		Users user = new Users();
 		user.setEmail(email);
-		user.setPassword(PasswordBCrypt.cryptPassWord(password));
+		user.setPassword(password);
 		user.setPicture(picture);
 		user.setUsername(username);
+
 		em.persist(user);
-		em.flush();
-		em.refresh(user);
 	}
 
 	public Users logUser(String username, String password) throws NoResultException, WrongPasswordException {
@@ -62,13 +61,12 @@ public class TweeterService {
 		else {
 			LOGGER.info("On s'est bien loggé");
 			return user;
-			}
+		}
 	}
-		
+	
 	public List<Users> findAllUsers() {
 
 		return em.createQuery("SELECT DISTINCT u "
-				 			+ "FROM User AS u", Users.class).getResultList();
+				 			+ "FROM Users AS u", Users.class).getResultList();
 	}
-
 }
