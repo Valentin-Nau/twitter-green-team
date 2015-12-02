@@ -45,6 +45,8 @@ public class TweeterService {
 		user.setPicture(picture);
 		user.setUsername(username);
 		em.persist(user);
+		em.flush();
+		em.refresh(user);
 	}
 
 	public Users logUser(String username, String password) throws NoResultException, WrongPasswordException {

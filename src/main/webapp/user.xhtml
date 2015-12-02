@@ -12,42 +12,45 @@
 	<br />
 	<h:form>
 		<h:panelGrid columns="4">
-
+		
 			<h:outputLabel for="username" value="Username" />
 			<h:inputText id="username" value="#{userCreateBean.username}" />
-			<h:message for="username" value="Username ne peut contenir que des caratères compris entre a-Z, 1-9 et '_'" />
+			<h:message for="username" value="#{userCreateBean.message}" />
 			<br />
 			<br />
 
 
 			<h:outputLabel for="password" value="Password" />
 			<h:inputSecret id="password" value="#{userCreateBean.password}"/>
-			<h:message for="password" value="Insérer un mot de passe comprenant un chiffre, une minuscule et une majuscule" />
+			<h:message for="password" value="#{userCreateBean.message}" />
 			<br />
 			<br />
 
 
 			<h:outputLabel for="password_confirm" value="Confirm password" />
 			<h:inputSecret id="password_confirm" value="#{userCreateBean.confirmPassword}" />
-			<h:message for="password_confirm" value="remettre le même password" />
+			<h:message for="password_confirm" value="#{userCreateBean.message}" />
 			<br />
 			<br />
 
 
 			<h:outputLabel for="email" value="Email" />
 			<h:inputText id="email" value="#{userCreateBean.email}" />
-			<h:message for="email" value="" />
+			<h:message for="email" value="#{userCreateBean.message}" />
 			<br />
 			<br />
 
 
 			<h:outputLabel for="picture" value="Picture" />
 			<h:inputText id="picture" value="#{userCreateBean.picture}" />
-			<h:message for="picture" value="" />
+			<h:message for="picture" value="#{userCreateBean.message}" />
 			<br />
 			<br />
 
 		</h:panelGrid>
+		<br />
+		<h:outputText value="#{userCreateBean.message}" />
+		<br />
 		<h:commandButton action="#{userCreateBean.createUser}"
 			value="S'incrire sur tweet" />
 
