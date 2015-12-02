@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.annotation.ManagedBean;
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
-import com.m2i.poec.twittergreen.entity.User;
+import com.m2i.poec.twittergreen.entity.Users;
 import com.m2i.poec.twittergreen.exception.WrongPasswordException;
 import com.m2i.poec.twittergreen.service.TweeterService;
 import java.io.Serializable;
@@ -26,13 +27,15 @@ public class UserLoginBean implements Serializable {
 	@Inject
 	private TweeterService tweeterService;
 
-	private User user;
+	private Users user;
 	
 	private String username;
 	private String password;
 	
 	private String errorName;
 	private String errorPass;
+
+	private boolean loggedIn=false;
 		
 	public String getPassword() {
 		return password;
@@ -50,11 +53,11 @@ public class UserLoginBean implements Serializable {
 		this.username = username;
 	}
 	
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 	
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 		
@@ -74,29 +77,33 @@ public class UserLoginBean implements Serializable {
 		return errorPass;
 	}
 	
+	public boolean isLoggedIn() {
+		return loggedIn;
+	}
+
+	public void setLoggedIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
+	}
+
 	public String logUser() {
 		try {
 			errorName="";
 			errorPass="";
 			user = tweeterService.logUser(username, password);
+			setLoggedIn(true);
+			((HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true)).setAttribute("user", user);
+			LOGGER.info("LoggedIn mis à true");
 			return "Profil?faces-redirect=true";
 		}
 		catch (EJBException e) {
 			errorName = "Le nom d'utilisateur n'existe pas";
+			setLoggedIn(false);
 			return "Login";
 		}
 		catch (WrongPasswordException e) {
 			errorPass = "Le mot de passe est incorrect";
+			setLoggedIn(false);
 			return "Login";
 		}
-	}
-	
-	public String test(){
-		LOGGER.log(Level.INFO, "================== DEBUT DE TEST ==================");
-		List<User> users= tweeterService.findAllUsers();
-		LOGGER.info(users.toString());
-		tweeterService.createUser("test", "test", "test", "test");
-		LOGGER.info(users.toString());
-		return "NewFile";
 	}
 }
