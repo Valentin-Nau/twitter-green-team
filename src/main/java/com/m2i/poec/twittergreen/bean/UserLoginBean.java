@@ -10,7 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.m2i.poec.twittergreen.entity.User;
+import com.m2i.poec.twittergreen.entity.Users;
 import com.m2i.poec.twittergreen.exception.WrongPasswordException;
 import com.m2i.poec.twittergreen.service.TweeterService;
 import java.io.Serializable;
@@ -26,7 +26,7 @@ public class UserLoginBean implements Serializable {
 	@Inject
 	private TweeterService tweeterService;
 
-	private User user;
+	private Users user;
 	
 	private String username;
 	private String password;
@@ -50,11 +50,11 @@ public class UserLoginBean implements Serializable {
 		this.username = username;
 	}
 	
-	public User getUser() {
+	public Users getUser() {
 		return user;
 	}
 	
-	public void setUser(User user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 		
@@ -93,7 +93,7 @@ public class UserLoginBean implements Serializable {
 	
 	public String test(){
 		LOGGER.log(Level.INFO, "================== DEBUT DE TEST ==================");
-		List<User> users= tweeterService.findAllUsers();
+		List<Users> users= tweeterService.findAllUsers();
 		LOGGER.info(users.toString());
 		tweeterService.createUser("test", "test", "test", "test");
 		LOGGER.info(users.toString());

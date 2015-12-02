@@ -22,7 +22,7 @@ public class Tweet {
 
 	@ManyToOne
 	@JoinColumn(name="iduser")
-	private User author;
+	private Users author;
 
 	@Column(name="content")
 	private String content;
@@ -47,11 +47,11 @@ public class Tweet {
 		this.id = id;
 	}
 
-	public User getAuthor() {
+	public Users getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(User author) {
+	public void setAuthor(Users author) {
 		this.author = author;
 	}
 

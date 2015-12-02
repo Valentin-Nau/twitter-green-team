@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 
 import com.m2i.poec.twittergreen.bean.TweetCreateBean;
 import com.m2i.poec.twittergreen.entity.Tweet;
-import com.m2i.poec.twittergreen.entity.User;
+import com.m2i.poec.twittergreen.entity.Users;
 import com.m2i.poec.twittergreen.exception.WrongPasswordException;
 import com.m2i.poec.twittergreen.password.PasswordTreatment;
 
@@ -19,10 +19,10 @@ public class TweeterService {
 
 	@PersistenceContext(unitName = "TwitterGreenPU")
 	private EntityManager em;
-	private User user = new User();
+	private Users user = new Users();
 	private static final Logger LOGGER = Logger.getLogger(TweetCreateBean.class.getName());
 	
-	public void createTweet(User user, String content) {
+	public void createTweet(Users user, String content) {
 
 		Tweet tweet = new Tweet();
 		tweet.setContent(content);
@@ -47,12 +47,12 @@ public class TweeterService {
 		em.persist(user);
 	}
 
-	public User logUser(String username, String password) throws NoResultException, WrongPasswordException {
+	public Users logUser(String username, String password) throws NoResultException, WrongPasswordException {
 
-		User user = em.createQuery("SELECT u "
+		Users user = em.createQuery("SELECT u "
 								 + "FROM User AS u "
 								 + "INNER JOIN  u.tweets "
-								 + "WHERE username = :pusername", User.class).setParameter("pusername", username).getSingleResult();
+								 + "WHERE username = :pusername", Users.class).setParameter("pusername", username).getSingleResult();
 
 		if(!PasswordTreatment.decryptPassword(password, user.getPassword())){
 			throw new WrongPasswordException();			
@@ -69,10 +69,10 @@ public class TweeterService {
 				 + "WHERE username = :pusername", User.class).setParameter("pusername", user.getUsername()).getSingleResult();
 	}*/
 
-	public List<User> findAllUsers() {
+	public List<Users> findAllUsers() {
 
 		return em.createQuery("SELECT DISTINCT u "
-				 			+ "FROM User AS u", User.class).getResultList();
+				 			+ "FROM User AS u", Users.class).getResultList();
 	}
 
 }
