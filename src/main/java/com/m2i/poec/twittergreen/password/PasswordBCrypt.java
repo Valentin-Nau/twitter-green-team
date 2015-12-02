@@ -25,7 +25,7 @@ public class PasswordBCrypt {
 	 * @param passwordCryptedStored
 	 * @return Boolean
 	 */
-	public static Boolean decryptPassword(String passwordEnterByUser, String passwordCryptedStored){
+	public static Boolean verifyPassword(String passwordEnterByUser, String passwordCryptedStored){
 		return BCrypt.checkpw(passwordEnterByUser, passwordCryptedStored);
 	}
 

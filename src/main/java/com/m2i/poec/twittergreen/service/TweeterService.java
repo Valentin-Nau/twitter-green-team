@@ -56,15 +56,10 @@ public class TweeterService {
 								 + "FROM User AS u "
 								 + "INNER JOIN  u.tweets "
 								 + "WHERE username = :pusername", User.class).setParameter("pusername", username).getSingleResult();
-<<<<<<< HEAD
 				
-		if(!PasswordBCrypt.decryptPassword(password, user.getPassword())){
+		if(!PasswordBCrypt.verifyPassword(password, user.getPassword())){
 			throw new WrongPasswordException();
-=======
 
-		if(!PasswordTreatment.decryptPassword(password, user.getPassword())){
-			throw new WrongPasswordException();			
->>>>>>> 2af25eca926a5a31fd11286ec866a7d9312da12f
 		}
 		else {
 			return user;

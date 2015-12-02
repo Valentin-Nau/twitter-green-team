@@ -4,30 +4,6 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:pf="http://primefaces.org/ui">
-<<<<<<< HEAD
-
-
-<h:head></h:head>
-<h:body>
-
-
-
-	<h:form>
-
-		<h:outputlabel for="content" value="Contenu" />
-		<h:inputText id="content" value="#{tweetCreateBean.content}" />
-		<br />
-		<h:commandButton action="#{ tweetCreateBean.createTweet }" value="Tweeter" />
-
-		<h:inputText id="languageID" value="#{tweetCreateBean.content}">
-			<f:validateRequired />
-			<f:validateLongRange minimum="1"></f:validateLongRange>
-		</h:inputText>
-	</h:form>
-
-</h:body>
-</html>
-=======
 	<h:head></h:head>
 	<h:body>
 		<h:form>
@@ -40,4 +16,3 @@
 		</h:form>
 	</h:body>
 </ui:composition>
->>>>>>> be23756affc21fa9191b5303c908024460b4ccae
