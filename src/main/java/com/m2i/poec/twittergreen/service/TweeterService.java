@@ -53,7 +53,6 @@ public class TweeterService {
 
 		Users user = em.createQuery("SELECT u "
 								 + "FROM Users AS u "
-								 + "INNER JOIN  u.tweets "
 								 + "WHERE username = :pusername", Users.class).setParameter("pusername", username).getSingleResult();
 				
 		if(!PasswordBCrypt.verifyPassword(password, user.getPassword())){

@@ -8,8 +8,11 @@ import java.util.logging.Logger;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.omg.PortableInterceptor.USER_EXCEPTION;
 
 import com.m2i.poec.twittergreen.check.Validator;
 import com.m2i.poec.twittergreen.exception.ConfirmPasswordNotValidException;
@@ -39,6 +42,7 @@ public class UserCreateBean implements Serializable {
 	private static final String ERROR_CONFIRM_PASSWORD = "Les champs \"Password\" doivent être identique";
 	private static final String ERROR_EMAIL = "Entrez une adresse Email valide";
 	private static final String ERROR_PICTURE = "Mettez une photo de profil";
+	private FacesContext facesContext = FacesContext.getCurrentInstance();
 	public UserCreateBean() {
 
 		message = "";
@@ -114,6 +118,7 @@ public class UserCreateBean implements Serializable {
 			return "Login.xhtml?faces-redirect=true";
 
 		} catch (UsernameNotValidException e) {
+//			facesContext.addMessage("username", new FacesMessage(ERROR_USERNAME));
 			message = ERROR_USERNAME;
 		} catch (PasswordNotValidException e) {
 			message = ERROR_PASSWORD;
