@@ -1,40 +1,29 @@
 package com.m2i.poec.twittergreen.bean;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import com.m2i.poec.twittergreen.check.Validator;
 import com.m2i.poec.twittergreen.service.TweeterService;
 
 @RequestScoped
 @Named
-public class UserCreateBean implements Serializable {
-	
-	
-	private Validator validator = new Validator();
+public class UserCreateBean {
+
 	private static final Logger LOGGER = Logger.getLogger(UserCreateBean.class.getName());
 
 	@Inject
 	private TweeterService tweetService;
+
 	private String username;
+
 	private String password;
-	private String confirmPassword;
+
 	private String email;
+
 	private String picture;
-	private String message;
-	
-	public UserCreateBean() {
-		
-		message="error";
-	}
 
 	public TweeterService getTweetService() {
 		return tweetService;
@@ -80,32 +69,16 @@ public class UserCreateBean implements Serializable {
 		return LOGGER;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
-	
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
 	public String createUser() {
 		try {
-			LOGGER.log(Level.INFO,"avant check");
-			validator.check(username, password, confirmPassword, email, picture);
-			LOGGER.log(Level.INFO,"avant tweetService");
 			tweetService.createUser(username, password, email, picture);
-			LOGGER.log(Level.INFO,"avant return");
-			return "Login.xhtml?faces-redirect=true";
-																	
-		} catch (Exception e) {
-			return "User.xhtml";
+		} catch (EJBException ex) {
+			
+			
+			return"";
+			
 		}
-	}
 
+		return "";
+	}
 }
