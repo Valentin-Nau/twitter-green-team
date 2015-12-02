@@ -5,6 +5,7 @@
 
 	<persistence-unit name="TwitterGreenPU">
 
+
 		<jta-data-source>java:jboss/datasources/TwitterGreenDS</jta-data-source>
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 	</persistence-unit>

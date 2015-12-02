@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:pf="http://primefaces.org/ui">
+<h:head>
+	<h:title> Nouveau sur Twitter </h:title>
+</h:head>
+<h:body>
+	<br />
+	<br />
+	<h:form>
+		<h:panelGrid columns="4">
+
+			<h:outputLabel for="username" value="Username" />
+			<h:inputText id="username" value="#{userCreateBean.username}" />
+			<h:message for="username" value="Username ne peut contenir que des caratères compris entre a-Z, 1-9 et '_'" />
+			<br />
+			<br />
+
+
+			<h:outputLabel for="password" value="Password" />
+			<h:inputSecret id="password" value="#{userCreateBean.password}"/>
+			<h:message for="password" value="Insérer un mot de passe comprenant un chiffre, une minuscule et une majuscule" />
+			<br />
+			<br />
+
+
+			<h:outputLabel for="password_confirm" value="Confirm password" />
+			<h:inputSecret id="password_confirm" value="#{userCreateBean.confirmPassword}" />
+			<h:message for="password_confirm" value="remettre le même password" />
+			<br />
+			<br />
+
+
+			<h:outputLabel for="email" value="Email" />
+			<h:inputText id="email" value="#{userCreateBean.email}" />
+			<h:message for="email" value="" />
+			<br />
+			<br />
+
+
+			<h:outputLabel for="picture" value="Picture" />
+			<h:inputText id="picture" value="#{userCreateBean.picture}" />
+			<h:message for="picture" value="" />
+			<br />
+			<br />
+
+		</h:panelGrid>
+		<h:commandButton action="#{userCreateBean.createUser}"
+			value="S'incrire sur tweet" />
+
+	</h:form>
+</h:body>
+</html>
