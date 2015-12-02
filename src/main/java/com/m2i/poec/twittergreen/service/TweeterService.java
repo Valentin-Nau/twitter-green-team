@@ -41,7 +41,7 @@ public class TweeterService {
 	public void createUser(String username, String password, String email, String picture) {
 		
 		user.setEmail(email);
-		user.setPassword(PasswordTreatment.cryptPassWord(password));
+		user.setPassword(PasswordBCrypt.cryptPassWord(password));
 		user.setPicture(picture);
 		user.setUsername(username);
 		em.persist(user);
@@ -55,30 +55,12 @@ public class TweeterService {
 
 								 + "WHERE username = :pusername", Users.class).setParameter("pusername", username).getSingleResult();
 
-								 + "WHERE username = :pusername", User.class).setParameter("pusername", username).getSingleResult();
-
-				
-		if(!PasswordBCrypt.decryptPassword(password, user.getPassword())){
-			throw new WrongPasswordException();
-
-
-
-		if(!PasswordTreatment.decryptPassword(password, user.getPassword())){
-			throw new WrongPasswordException();			
-
-		}
-		else {
+	
 			return user;
 		}
-	}
 	
-	/*public void refreshUser(User user){
-		user = em.createQuery("SELECT u "
-				 + "FROM User AS u "
-				 + "INNER JOIN  u.tweets "
-				 + "WHERE username = :pusername", User.class).setParameter("pusername", user.getUsername()).getSingleResult();
-	}*/
-
+	
+	
 	public List<Users> findAllUsers() {
 
 		return em.createQuery("SELECT DISTINCT u "
