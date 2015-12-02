@@ -3,6 +3,7 @@ package com.m2i.poec.twittergreen.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.RequestScoped;
@@ -17,7 +18,7 @@ import com.m2i.poec.twittergreen.service.TweeterService;
 @Named
 public class UserCreateBean implements Serializable {
 	
-	private HashMap<String, String> message;
+	
 	private Validator validator = new Validator();
 	private static final Logger LOGGER = Logger.getLogger(UserCreateBean.class.getName());
 
@@ -28,13 +29,11 @@ public class UserCreateBean implements Serializable {
 	private String confirmPassword;
 	private String email;
 	private String picture;
+	private String message;
 	
 	public UserCreateBean() {
-		username="";
-		password="";
-		confirmPassword="";
-		email="";
-		picture="";
+		
+		message="error";
 	}
 
 	public TweeterService getTweetService() {
@@ -81,10 +80,12 @@ public class UserCreateBean implements Serializable {
 		return LOGGER;
 	}
 
-	public void setMessage(HashMap<String, String> message) {
+	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+	public String getMessage() {
+		return message;
+	}
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
@@ -95,12 +96,14 @@ public class UserCreateBean implements Serializable {
 
 	public String createUser() {
 		try {
+			LOGGER.log(Level.INFO,"avant check");
 			validator.check(username, password, confirmPassword, email, picture);
+			LOGGER.log(Level.INFO,"avant tweetService");
 			tweetService.createUser(username, password, email, picture);
+			LOGGER.log(Level.INFO,"avant return");
 			return "Login.xhtml?faces-redirect=true";
 																	
 		} catch (Exception e) {
-			message.put("username", "username est vide");
 			return "User.xhtml";
 		}
 	}
