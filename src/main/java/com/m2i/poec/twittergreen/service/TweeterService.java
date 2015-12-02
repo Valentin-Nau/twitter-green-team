@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import com.m2i.poec.twittergreen.entity.Tweet;
 import com.m2i.poec.twittergreen.entity.User;
 import com.m2i.poec.twittergreen.exception.WrongPasswordException;
-import com.m2i.poec.twittergreen.password.PasswordTreatment;
+import com.m2i.poec.twittergreen.password.PasswordBCrypt;
 
 @Stateful
 public class TweeterService {
@@ -45,7 +45,7 @@ public class TweeterService {
 								 + "FROM User "
 								 + "WHERE username = :pusername", User.class).setParameter("pusername", username).getSingleResult();
 				
-		if(!PasswordTreatment.decryptPassword(password, user.getPassword())){
+		if(!PasswordBCrypt.decryptPassword(password, user.getPassword())){
 			throw new WrongPasswordException();
 		}
 	}
