@@ -11,7 +11,7 @@
 			<h:inputTextarea id="content" value="#{tweetCreateBean.content}" styleClass="text-input">
 				<f:validateLength minimum="1" maximum="140" />
 			</h:inputTextarea>
-			<h:message for="content"/>
+			<br /><h:message for="content"/>
 			<br />
 			<h:commandButton action="#{ tweetCreateBean.createTweet }"
 				value="Tweeter">

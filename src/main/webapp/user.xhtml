@@ -12,7 +12,7 @@
 	<br />
 	<h:form>
 		<h:panelGrid columns="4">
-		
+
 			<h:outputLabel for="username" value="Username" />
 			<h:inputText id="username" value="#{userCreateBean.username}" />
 			<h:message for="username" value="#{userCreateBean.message}" />
@@ -21,14 +21,15 @@
 
 
 			<h:outputLabel for="password" value="Password" />
-			<h:inputSecret id="password" value="#{userCreateBean.password}"/>
+			<h:inputSecret id="password" value="#{userCreateBean.password}" />
 			<h:message for="password" value="#{userCreateBean.message}" />
 			<br />
 			<br />
 
 
 			<h:outputLabel for="password_confirm" value="Confirm password" />
-			<h:inputSecret id="password_confirm" value="#{userCreateBean.confirmPassword}" />
+			<h:inputSecret id="password_confirm"
+				value="#{userCreateBean.confirmPassword}" />
 			<h:message for="password_confirm" value="#{userCreateBean.message}" />
 			<br />
 			<br />
@@ -41,11 +42,11 @@
 			<br />
 
 
-<!-- 			<h:outputLabel for="picture" value="Picture" /> -->
-<!-- 			<h:inputText id="picture" value="#{userCreateBean.picture}" /> -->
-<!-- 			<h:message for="picture" value="#{userCreateBean.message}" /> -->
-<!-- 			<br /> -->
-<!-- 			<br /> -->
+			<!-- 			<h:outputLabel for="picture" value="Picture" /> -->
+			<!-- 			<h:inputText id="picture" value="#{userCreateBean.picture}" /> -->
+			<!-- 			<h:message for="picture" value="#{userCreateBean.message}" /> -->
+			<!-- 			<br /> -->
+			<!-- 			<br /> -->
 
 		</h:panelGrid>
 		<br />

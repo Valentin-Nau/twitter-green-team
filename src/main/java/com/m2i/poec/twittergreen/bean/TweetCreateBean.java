@@ -22,7 +22,7 @@ public class TweetCreateBean {
 	@Inject
 	private UserLoginBean userLoginBean;
 	
-	private String content;
+	private String content ="";
 
 	public String getContent() {
 		return content;
@@ -36,6 +36,7 @@ public class TweetCreateBean {
 
 		try {
 			tweetService.createTweet(userLoginBean.getUser(), content);
+			content = "";
 			return "Profil";
 		} catch(EJBException ex) {
 

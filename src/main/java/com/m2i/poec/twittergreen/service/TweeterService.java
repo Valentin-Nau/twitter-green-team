@@ -1,16 +1,11 @@
 package com.m2i.poec.twittergreen.service;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-
-import org.mindrot.jbcrypt.BCrypt;
-
 import com.m2i.poec.twittergreen.bean.TweetCreateBean;
 import com.m2i.poec.twittergreen.entity.Tweet;
 import com.m2i.poec.twittergreen.entity.Users;
@@ -41,7 +36,8 @@ public class TweeterService {
 
 	}
 
-	public void createUser(String username, String password, String email, String picture) throws DuplicateNameException {
+	public void createUser(String username, String password, String email, String picture)
+			throws DuplicateNameException {
 
 		Users user = new Users();
 		user.setEmail(email);

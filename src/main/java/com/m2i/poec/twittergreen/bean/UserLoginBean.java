@@ -1,9 +1,5 @@
 package com.m2i.poec.twittergreen.bean;
-
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -11,7 +7,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
-
 import com.m2i.poec.twittergreen.entity.Users;
 import com.m2i.poec.twittergreen.exception.WrongPasswordException;
 import com.m2i.poec.twittergreen.service.TweeterService;
@@ -87,21 +82,22 @@ public class UserLoginBean implements Serializable {
 	}
 
 	public void logUserAfterSigIn(String username, String password) {
+		LOGGER.info("On passe dans logUserAfterSignIn");
 		this.username = username;
 		this.password = password;
 		logUser();
-		((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true)).setAttribute("user",
-				username);
 	}
 
 	public String logUser() {
 		try {
 			errorName = "";
 			errorPass = "";
+			LOGGER.info("Avant le logUser de service");
 			user = tweeterService.logUser(username, password);
 			setLoggedIn(true);
+			LOGGER.info("Avant d'insérer l'user dans la session HTTP");
 			((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true)).setAttribute("user",
-					username);
+					user);
 			LOGGER.info("LoggedIn mis à true");
 			return "Profil?faces-redirect=true";
 		} catch (EJBException e) {
@@ -117,5 +113,10 @@ public class UserLoginBean implements Serializable {
 			setLoggedIn(false);
 			return "Login";
 		}
+	}
+
+	public void setTwitterService(TweeterService tweetService) {
+		this.tweeterService = tweetService;
+		
 	}
 }

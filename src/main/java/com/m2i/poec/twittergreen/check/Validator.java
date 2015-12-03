@@ -49,7 +49,7 @@ public class Validator {
 			throw new ConfirmPasswordNotValidException();
 		}
 		
-		if(null == email || email.indexOf("@") < 1){
+		if(null == email || (email.indexOf("@") < 1 || email.indexOf("@") == email.length() - 1)){
 			LOGGER.log(Level.INFO,"exception email");
 			throw new EmailNotValidException();
 		}

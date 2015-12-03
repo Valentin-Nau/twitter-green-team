@@ -1,18 +1,13 @@
 package com.m2i.poec.twittergreen.bean;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.PersistenceException;
-import javax.swing.SpringLayout.Constraints;
-
-import org.omg.PortableInterceptor.USER_EXCEPTION;
 
 import com.m2i.poec.twittergreen.check.Validator;
 import com.m2i.poec.twittergreen.exception.ConfirmPasswordNotValidException;
@@ -22,20 +17,24 @@ import com.m2i.poec.twittergreen.exception.PasswordNotValidException;
 import com.m2i.poec.twittergreen.exception.PictureNotValidException;
 import com.m2i.poec.twittergreen.exception.UsernameNotValidException;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import com.m2i.poec.twittergreen.service.TweeterService;
 
+@ManagedBean
 @RequestScoped
-@Named
-
 public class UserCreateBean {
 
 	private static final Logger LOGGER = Logger.getLogger(UserCreateBean.class.getName());
 
 	@Inject
 	private TweeterService tweetService;
+	
+	@ManagedProperty(value="#{userLoginBean}")
+    private UserLoginBean userLoginBean;
+    
+	public void setUserLoginBean(UserLoginBean userLoginBean) {
+		LOGGER.info("dghhsdfghsfgh");
+		this.userLoginBean = userLoginBean;
+	}
 
 	private String username;
 
@@ -126,15 +125,17 @@ public class UserCreateBean {
 		try {
 			validator.check(username, password, confirmPassword, email, picture);
 			tweetService.createUser(username, password, email, picture);
-			
-			
+			LOGGER.info("Avant init des variables");
+			userLoginBean.setUsername(username);
+			userLoginBean.setPassword(password);
+			LOGGER.info("Avant log");
+			userLoginBean.logUser();
+
 			return "Profil.xhtml?faces-redirect=true";
 
 		} catch (DuplicateNameException e) {
 			message = "Username déja utilisé";
 		} catch (UsernameNotValidException e) {
-			// facesContext.addMessage("username", new
-			// FacesMessage(ERROR_USERNAME));
 			message = ERROR_USERNAME;
 		} catch (PasswordNotValidException e) {
 			message = ERROR_PASSWORD;
