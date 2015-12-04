@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import com.m2i.poec.twittergreen.check.Validator;
 import com.m2i.poec.twittergreen.exception.ConfirmPasswordNotValidException;
+import com.m2i.poec.twittergreen.exception.DuplicateEmailException;
 import com.m2i.poec.twittergreen.exception.DuplicateNameException;
 import com.m2i.poec.twittergreen.exception.EmailNotValidException;
 import com.m2i.poec.twittergreen.exception.PasswordNotValidException;
@@ -53,6 +54,9 @@ public class UserCreateBean {
 	private static final String ERROR_CONFIRM_PASSWORD = "Les champs \"Password\" doivent être identique";
 	private static final String ERROR_EMAIL = "Entrez une adresse Email valide";
 	private static final String ERROR_PICTURE = "Mettez une photo de profil";
+	private static final String DUPLICATE_EMAIL = "Cet email est déjà utilisé";
+	private static final String DUPLICATE_USERNAME = "Cet username est déja utilisé";
+	
 	private FacesContext facesContext = FacesContext.getCurrentInstance();
 
 	public UserCreateBean() {
@@ -134,13 +138,15 @@ public class UserCreateBean {
 			return "Profil.xhtml?faces-redirect=true";
 
 		} catch (DuplicateNameException e) {
-			message = "Username déja utilisé";
+			message = DUPLICATE_USERNAME;
 		} catch (UsernameNotValidException e) {
 			message = ERROR_USERNAME;
 		} catch (PasswordNotValidException e) {
 			message = ERROR_PASSWORD;
 		} catch (ConfirmPasswordNotValidException e) {
 			message = ERROR_CONFIRM_PASSWORD;
+		} catch (DuplicateEmailException e) {
+			message = DUPLICATE_EMAIL;
 		} catch (EmailNotValidException e) {
 			message = ERROR_EMAIL;
 		} catch (PictureNotValidException e) {
