@@ -12,9 +12,9 @@ CREATE TABLE `tweet` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS 'users';
+DROP TABLE IF EXISTS `users`;
 
-CREATE TABLE 'users' (
+CREATE TABLE `users` (
   `iduser` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -24,4 +24,14 @@ CREATE TABLE 'users' (
   UNIQUE KEY `iduser_UNIQUE` (`iduser`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table  des utilisateurs de tweet.';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `retweets`;
+
+CREATE TABLE `retweet` (
+	`idretweet` bigint(20) NOT NULL,
+    `idtweet` bigint(20) NOT NULL,
+    `iduser` bigint(20) NOT NULL,
+    `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`idretweet`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
