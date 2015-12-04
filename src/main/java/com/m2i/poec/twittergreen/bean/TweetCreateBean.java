@@ -20,8 +20,15 @@ public class TweetCreateBean {
 	private TweeterService tweetService;
 
 	@Inject
-	private UserLoginBean userLoginBean;
-	
+    private SessionBean sessionBean;
+    
+	/*public void setSessionBean(SessionBean sessionBean) {
+		this.sessionBean = sessionBean;
+	}	
+	public SessionBean getSessionBean() {
+		return sessionBean;
+	}*/
+
 	private String content ="";
 
 	public String getContent() {
@@ -35,7 +42,7 @@ public class TweetCreateBean {
 	public String createTweet() {
 
 		try {
-			tweetService.createTweet(userLoginBean.getUser(), content);
+			tweetService.createTweet(sessionBean.getUser(), content);
 			content = "";
 			return "Profil";
 		} catch(EJBException ex) {

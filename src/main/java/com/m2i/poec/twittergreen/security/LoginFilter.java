@@ -1,7 +1,6 @@
 package com.m2i.poec.twittergreen.security;
 
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.logging.Logger;
 
 import javax.servlet.Filter;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.m2i.poec.twittergreen.bean.UserCreateBean;
-import com.m2i.poec.twittergreen.bean.UserLoginBean;
 import com.m2i.poec.twittergreen.entity.Users;
 
 @WebFilter("/Profil.xhtml")

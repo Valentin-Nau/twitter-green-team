@@ -3,13 +3,13 @@ package com.m2i.poec.twittergreen.bean;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import com.m2i.poec.twittergreen.check.Validator;
+import com.m2i.poec.twittergreen.entity.Users;
 import com.m2i.poec.twittergreen.exception.ConfirmPasswordNotValidException;
 import com.m2i.poec.twittergreen.exception.DuplicateEmailException;
 import com.m2i.poec.twittergreen.exception.DuplicateNameException;
@@ -20,22 +20,21 @@ import com.m2i.poec.twittergreen.exception.UsernameNotValidException;
 
 import com.m2i.poec.twittergreen.service.TweeterService;
 
-@ManagedBean
+@Named
 @RequestScoped
 public class UserCreateBean {
 
 	private static final Logger LOGGER = Logger.getLogger(UserCreateBean.class.getName());
 
 	@Inject
-	private TweeterService tweetService;
+	private TweeterService tweeterService;
 	
-	@ManagedProperty(value="#{userLoginBean}")
-    private UserLoginBean userLoginBean;
+	@Inject
+    private SessionBean sessionBean;
     
-	public void setUserLoginBean(UserLoginBean userLoginBean) {
-		LOGGER.info("dghhsdfghsfgh");
-		this.userLoginBean = userLoginBean;
-	}
+	/*public void setSessionBean(SessionBean sessionBean) {
+		this.sessionBean = sessionBean;
+	}*/
 
 	private String username;
 
@@ -56,8 +55,6 @@ public class UserCreateBean {
 	private static final String ERROR_PICTURE = "Mettez une photo de profil";
 	private static final String DUPLICATE_EMAIL = "Cet email est déjà utilisé";
 	private static final String DUPLICATE_USERNAME = "Cet username est déja utilisé";
-	
-	private FacesContext facesContext = FacesContext.getCurrentInstance();
 
 	public UserCreateBean() {
 
@@ -66,11 +63,11 @@ public class UserCreateBean {
 	}
 
 	public TweeterService getTweetService() {
-		return tweetService;
+		return tweeterService;
 	}
 
 	public void setTweetService(TweeterService tweetService) {
-		this.tweetService = tweetService;
+		this.tweeterService = tweetService;
 	}
 
 	public String getUsername() {
@@ -128,12 +125,11 @@ public class UserCreateBean {
 	public String createUser() {
 		try {
 			validator.check(username, password, confirmPassword, email, picture);
-			tweetService.createUser(username, password, email, picture);
-			LOGGER.info("Avant init des variables");
-			userLoginBean.setUsername(username);
-			userLoginBean.setPassword(password);
-			LOGGER.info("Avant log");
-			userLoginBean.logUser();
+			Users user = tweeterService.createUser(username, password, email, picture);
+
+			tweeterService.logUser(username, password);
+			sessionBean.setUser(user);
+			((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true)).setAttribute("user", user);
 
 			return "Profil.xhtml?faces-redirect=true";
 

@@ -14,12 +14,12 @@
 	<div id="global">
 		<div id="entete"></div>
 		<div id="centre">
-			<div id="navigation">#{userLoginBean.user.username}</div>
+			<div id="navigation">#{sessionBean.user.username}</div>
 			<div id="principal">
 				<ui:include src="Tweet.xhtml" />
-				<c:forEach items="#{userLoginBean.user.tweets}" var="tweet">
+				<c:forEach items="#{sessionBean.user.tweets}" var="tweet">
 					<p>
-						#{userLoginBean.user.username} : #{tweet.creationDate} <br />
+						#{sessionBean.user.username} : #{tweet.creationDate} <br />
 						#{tweet.content }
 					</p>
 				</c:forEach>

@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.m2i.poec.twittergreen.bean.UserCreateBean;
 import com.m2i.poec.twittergreen.exception.ConfirmPasswordNotValidException;
 import com.m2i.poec.twittergreen.exception.EmailNotValidException;
 import com.m2i.poec.twittergreen.exception.PasswordNotValidException;

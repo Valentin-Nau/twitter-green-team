@@ -1,37 +1,40 @@
 package com.m2i.poec.twittergreen.bean;
 import java.util.logging.Logger;
 import javax.ejb.EJBException;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
+
 import com.m2i.poec.twittergreen.entity.Users;
 import com.m2i.poec.twittergreen.exception.WrongPasswordException;
 import com.m2i.poec.twittergreen.service.TweeterService;
 import java.io.Serializable;
 
-@SessionScoped
+@RequestScoped
 @Named
 public class UserLoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private static final Logger LOGGER = Logger.getLogger(UserCreateBean.class.getName());
+	
+	private static final String ERROR_NAME = "Le nom d'utilisateur n'existe pas";
+	private static final String ERROR_PASS = "Le mot de passe est incorrect";
 
 	@Inject
+    private SessionBean sessionBean;
+	
+	@Inject
 	private TweeterService tweeterService;
-
-	private Users user;
 
 	private String username;
 	private String password;
 
 	private String errorName;
 	private String errorPass;
-
-	private boolean loggedIn = false;
 
 	public String getPassword() {
 		return password;
@@ -47,14 +50,6 @@ public class UserLoginBean implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public Users getUser() {
-		return user;
-	}
-
-	public void setUser(Users user) {
-		this.user = user;
 	}
 
 	public String getErrorName() {
@@ -73,14 +68,6 @@ public class UserLoginBean implements Serializable {
 		return errorPass;
 	}
 
-	public boolean isLoggedIn() {
-		return loggedIn;
-	}
-
-	public void setLoggedIn(boolean loggedIn) {
-		this.loggedIn = loggedIn;
-	}
-
 	public void logUserAfterSigIn(String username, String password) {
 		LOGGER.info("On passe dans logUserAfterSignIn");
 		this.username = username;
@@ -92,25 +79,28 @@ public class UserLoginBean implements Serializable {
 		try {
 			errorName = "";
 			errorPass = "";
-			LOGGER.info("Avant le logUser de service");
-			user = tweeterService.logUser(username, password);
-			setLoggedIn(true);
-			LOGGER.info("Avant d'insérer l'user dans la session HTTP");
-			((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true)).setAttribute("user",
-					user);
-			LOGGER.info("LoggedIn mis à true");
+			
+			Users user = tweeterService.logUser(username, password);
+			sessionBean.setUser(user);
+			LOGGER.info(sessionBean.getUser().toString());
+			((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true)).setAttribute("user", user);
+			
 			return "Profil?faces-redirect=true";
+			
 		} catch (EJBException e) {
+			
 			if (e.getCause().getClass() == NoResultException.class) {
-				errorName = "Le nom d'utilisateur n'existe pas";
-			} else if (e.getCause().getClass() == IllegalArgumentException.class) {
+				errorName = ERROR_NAME;
+			} 
+			else if (e.getCause().getClass() == IllegalArgumentException.class) {
 				errorPass = "Erreur inconnu";
 			}
-			setLoggedIn(false);
+			
 			return "Login";
+			
 		} catch (WrongPasswordException e) {
-			errorPass = "Le mot de passe est incorrect";
-			setLoggedIn(false);
+			
+			errorPass = ERROR_PASS;
 			return "Login";
 		}
 	}

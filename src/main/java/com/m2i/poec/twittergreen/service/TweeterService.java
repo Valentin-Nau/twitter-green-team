@@ -3,7 +3,6 @@ package com.m2i.poec.twittergreen.service;
 import java.util.logging.Logger;
 import java.util.List;
 
-import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -15,7 +14,6 @@ import com.m2i.poec.twittergreen.entity.Tweet;
 import com.m2i.poec.twittergreen.entity.Users;
 import com.m2i.poec.twittergreen.exception.DuplicateEmailException;
 import com.m2i.poec.twittergreen.exception.DuplicateNameException;
-import com.m2i.poec.twittergreen.exception.EmailNotValidException;
 import com.m2i.poec.twittergreen.exception.WrongPasswordException;
 import com.m2i.poec.twittergreen.security.PasswordBCrypt;
 
@@ -42,7 +40,7 @@ public class TweeterService {
 
 	}
 
-	public void createUser(String username, String password, String email, String picture) 
+	public Users createUser(String username, String password, String email, String picture) 
 		throws DuplicateNameException, DuplicateEmailException {
 
 		Users user = new Users();
@@ -60,20 +58,18 @@ public class TweeterService {
 				throw new DuplicateEmailException();
 			}
 		}
-
+		return user;
 	}
 
 	public Users logUser(String username, String password)
 			throws NoResultException, WrongPasswordException, IllegalArgumentException {
-		LOGGER.info("username " + username + " " + password);
+		
 		Users user = em.createQuery("SELECT u " + "FROM Users AS u " + "WHERE username = :pusername", Users.class)
 				.setParameter("pusername", username).getSingleResult();
-		LOGGER.info(user.toString());
 		if (!PasswordBCrypt.verifyPassword(password, user.getPassword())) {
 			throw new WrongPasswordException();
-
-		} else {
-			LOGGER.info("On s'est bien loggé");
+		}
+		else {
 			return user;
 		}
 	}
