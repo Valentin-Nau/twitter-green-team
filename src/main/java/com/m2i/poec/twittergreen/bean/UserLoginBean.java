@@ -82,10 +82,9 @@ public class UserLoginBean implements Serializable {
 			
 			Users user = tweeterService.logUser(username, password);
 			sessionBean.setUser(user);
-			LOGGER.info(sessionBean.getUser().toString());
 			((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true)).setAttribute("user", user);
 			
-			return "Profil?faces-redirect=true";
+			return "Profil?username=" + user.getUsername() + "&faces-redirect=true";
 			
 		} catch (EJBException e) {
 			

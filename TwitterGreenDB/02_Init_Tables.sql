@@ -29,7 +29,7 @@ CREATE TABLE `users` (
 DROP TABLE IF EXISTS `retweet`;
 
 CREATE TABLE `retweet` (
-	`idretweet` bigint(20) NOT NULL,
+	`idretweet` bigint(20) NOT NULL AUTO_INCREMENT,
     `idtweet` bigint(20) NOT NULL,
     `iduser` bigint(20) NOT NULL,
     `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
