@@ -22,6 +22,7 @@
 		<div id="centre">
 			<div id="navigation">#{profilePageBean.userName}</div>
 			<div id="principal">
+
 				<h:form id="tweetform" rendered="#{profilePageBean.userName == sessionBean.user.username}">
 					<h:inputTextarea id="tweetcontent" value="#{profilePageBean.content}"
 						styleClass="text-input">
@@ -37,7 +38,7 @@
 				<h:panelGroup id="tweets">
 					<c:forEach items="#{profilePageBean.tweets}" var="tweet">
 						<p>
-							#{tweet.author.username} : #{tweet.creationDate} <br />
+							<h:link value="#{tweet.author.username}" outcome="Profil.xhtml?username=#{tweet.author.username}"/> : #{tweet.creationDate} <br />
 							#{tweet.content}
 						</p>
 					</c:forEach>
