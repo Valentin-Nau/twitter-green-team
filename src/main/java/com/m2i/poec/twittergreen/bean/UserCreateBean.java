@@ -3,14 +3,15 @@ package com.m2i.poec.twittergreen.bean;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 
 import com.m2i.poec.twittergreen.check.Validator;
+import com.m2i.poec.twittergreen.entity.User;
 import com.m2i.poec.twittergreen.exception.ConfirmPasswordNotValidException;
+import com.m2i.poec.twittergreen.exception.DuplicateEmailException;
 import com.m2i.poec.twittergreen.exception.DuplicateNameException;
 import com.m2i.poec.twittergreen.exception.EmailNotValidException;
 import com.m2i.poec.twittergreen.exception.PasswordNotValidException;
@@ -19,23 +20,18 @@ import com.m2i.poec.twittergreen.exception.UsernameNotValidException;
 
 import com.m2i.poec.twittergreen.service.TweeterService;
 
-@ManagedBean
+@Named
 @RequestScoped
 public class UserCreateBean {
 
 	private static final Logger LOGGER = Logger.getLogger(UserCreateBean.class.getName());
 
 	@Inject
-	private TweeterService tweetService;
+	private TweeterService tweeterService;
 	
-	@ManagedProperty(value="#{userLoginBean}")
-    private UserLoginBean userLoginBean;
+	@Inject
+    private SessionBean sessionBean;
     
-	public void setUserLoginBean(UserLoginBean userLoginBean) {
-		LOGGER.info("dghhsdfghsfgh");
-		this.userLoginBean = userLoginBean;
-	}
-
 	private String username;
 
 	private String password;
@@ -53,7 +49,8 @@ public class UserCreateBean {
 	private static final String ERROR_CONFIRM_PASSWORD = "Les champs \"Password\" doivent être identique";
 	private static final String ERROR_EMAIL = "Entrez une adresse Email valide";
 	private static final String ERROR_PICTURE = "Mettez une photo de profil";
-	private FacesContext facesContext = FacesContext.getCurrentInstance();
+	private static final String DUPLICATE_EMAIL = "Cet email est déjà utilisé";
+	private static final String DUPLICATE_USERNAME = "Cet username est déja utilisé";
 
 	public UserCreateBean() {
 
@@ -62,11 +59,11 @@ public class UserCreateBean {
 	}
 
 	public TweeterService getTweetService() {
-		return tweetService;
+		return tweeterService;
 	}
 
 	public void setTweetService(TweeterService tweetService) {
-		this.tweetService = tweetService;
+		this.tweeterService = tweetService;
 	}
 
 	public String getUsername() {
@@ -124,23 +121,24 @@ public class UserCreateBean {
 	public String createUser() {
 		try {
 			validator.check(username, password, confirmPassword, email, picture);
-			tweetService.createUser(username, password, email, picture);
-			LOGGER.info("Avant init des variables");
-			userLoginBean.setUsername(username);
-			userLoginBean.setPassword(password);
-			LOGGER.info("Avant log");
-			userLoginBean.logUser();
+			User user = tweeterService.createUser(username, password, email, picture);
 
-			return "Profil.xhtml?faces-redirect=true";
+			tweeterService.logUser(username, password);
+			sessionBean.setUser(user);
+			((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true)).setAttribute("user", user);
+
+			return "Profil?faces-redirect=true";
 
 		} catch (DuplicateNameException e) {
-			message = "Username déja utilisé";
+			message = DUPLICATE_USERNAME;
 		} catch (UsernameNotValidException e) {
 			message = ERROR_USERNAME;
 		} catch (PasswordNotValidException e) {
 			message = ERROR_PASSWORD;
 		} catch (ConfirmPasswordNotValidException e) {
 			message = ERROR_CONFIRM_PASSWORD;
+		} catch (DuplicateEmailException e) {
+			message = DUPLICATE_EMAIL;
 		} catch (EmailNotValidException e) {
 			message = ERROR_EMAIL;
 		} catch (PictureNotValidException e) {
