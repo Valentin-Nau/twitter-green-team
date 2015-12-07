@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
 @Entity
-public class Users {
+public class User {
 	@Id
 	@Column(name = "iduser")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

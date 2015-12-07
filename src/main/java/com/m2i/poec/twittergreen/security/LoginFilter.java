@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.m2i.poec.twittergreen.bean.UserCreateBean;
-import com.m2i.poec.twittergreen.entity.Users;
+import com.m2i.poec.twittergreen.entity.User;
 
 @WebFilter("/Profil.xhtml")
 public class LoginFilter implements Filter {
@@ -33,7 +33,7 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
-        Users user = (Users)request.getSession().getAttribute("user");
+        User user = (User)request.getSession().getAttribute("user");
         
         String loginURL = request.getContextPath() + "/Login.xhtml";
         if(user != null){

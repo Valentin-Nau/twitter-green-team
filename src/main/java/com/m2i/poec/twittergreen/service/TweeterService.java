@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 
 import com.m2i.poec.twittergreen.entity.Tweet;
-import com.m2i.poec.twittergreen.entity.Users;
+import com.m2i.poec.twittergreen.entity.User;
 import com.m2i.poec.twittergreen.exception.DuplicateEmailException;
 import com.m2i.poec.twittergreen.exception.DuplicateNameException;
 import com.m2i.poec.twittergreen.exception.WrongPasswordException;
@@ -24,7 +24,7 @@ public class TweeterService {
 
 	private static final Logger LOGGER = Logger.getLogger(TweeterService.class.getName());
 
-	public void createTweet(Users user, String content) {
+	public void createTweet(User user, String content) {
 
 		Tweet tweet = new Tweet();
 		tweet.setContent(content);
@@ -40,10 +40,10 @@ public class TweeterService {
 
 	}
 
-	public Users createUser(String username, String password, String email, String picture) 
+	public User createUser(String username, String password, String email, String picture) 
 		throws DuplicateNameException, DuplicateEmailException {
 
-		Users user = new Users();
+		User user = new User();
 		user.setEmail(email);
 		user.setPassword(PasswordBCrypt.cryptPassWord(password));
 		user.setPicture(picture);
@@ -61,10 +61,10 @@ public class TweeterService {
 		return user;
 	}
 
-	public Users logUser(String username, String password)
+	public User logUser(String username, String password)
 			throws NoResultException, WrongPasswordException, IllegalArgumentException {
 		
-		Users user = em.createQuery("SELECT u " + "FROM Users AS u " + "WHERE username = :pusername", Users.class)
+		User user = em.createQuery("SELECT u " + "FROM Users AS u " + "WHERE username = :pusername", User.class)
 				.setParameter("pusername", username).getSingleResult();
 		if (!PasswordBCrypt.verifyPassword(password, user.getPassword())) {
 			throw new WrongPasswordException();
@@ -74,15 +74,15 @@ public class TweeterService {
 		}
 	}
 
-	public List<Users> findAllUsers() {
+	public List<User> findAllUsers() {
 
-		return em.createQuery("SELECT DISTINCT u " + "FROM Users AS u", Users.class).getResultList();
+		return em.createQuery("SELECT DISTINCT u " + "FROM Users AS u", User.class).getResultList();
 	}
 
 
-	public Users getUser(String username) {
+	public User getUser(String username) {
 		LOGGER.info("test pendant getUser");
-		Users user = em.createQuery("SELECT u " + "FROM Users AS u " + "WHERE username = :pusername", Users.class)
+		User user = em.createQuery("SELECT u " + "FROM Users AS u " + "WHERE username = :pusername", User.class)
 				.setParameter("pusername", username).getSingleResult();
 		LOGGER.info(user.toString());
 		return user;

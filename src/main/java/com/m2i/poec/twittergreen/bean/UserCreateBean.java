@@ -9,7 +9,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import com.m2i.poec.twittergreen.check.Validator;
-import com.m2i.poec.twittergreen.entity.Users;
+import com.m2i.poec.twittergreen.entity.User;
 import com.m2i.poec.twittergreen.exception.ConfirmPasswordNotValidException;
 import com.m2i.poec.twittergreen.exception.DuplicateEmailException;
 import com.m2i.poec.twittergreen.exception.DuplicateNameException;
@@ -121,7 +121,7 @@ public class UserCreateBean {
 	public String createUser() {
 		try {
 			validator.check(username, password, confirmPassword, email, picture);
-			Users user = tweeterService.createUser(username, password, email, picture);
+			User user = tweeterService.createUser(username, password, email, picture);
 
 			tweeterService.logUser(username, password);
 			sessionBean.setUser(user);

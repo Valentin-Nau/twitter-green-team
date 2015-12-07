@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.m2i.poec.twittergreen.entity.Tweet;
-import com.m2i.poec.twittergreen.entity.Users;
+import com.m2i.poec.twittergreen.entity.User;
 import com.m2i.poec.twittergreen.service.TweeterService;
 
 @Named
@@ -19,7 +19,7 @@ import com.m2i.poec.twittergreen.service.TweeterService;
 public class ProfilePageBean implements Serializable{
 	private String userName;
 	
-	private Users user;
+	private User user;
 	
 	private static final Logger LOGGER = Logger.getLogger(ProfilePageBean.class.getName());
 	
@@ -67,11 +67,11 @@ public class ProfilePageBean implements Serializable{
 		}
 	}
 
-	public Users getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(Users user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 }
