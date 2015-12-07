@@ -19,7 +19,7 @@
 				<ui:include src="Tweet.xhtml" />
 				<c:forEach items="#{sessionBean.user.tweets}" var="tweet">
 					<p>
-						#{sessionBean.user.username} : #{tweet.creationDate} <br />
+						<h:link value="#{sessionBean.user.username}" outcome="Profil.xhtml?username=#{sessionBean.user.username}" /> : #{tweet.creationDate} <br />
 						#{tweet.content }
 					</p>
 				</c:forEach>

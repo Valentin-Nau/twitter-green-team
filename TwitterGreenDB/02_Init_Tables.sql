@@ -26,7 +26,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `retweets`;
+DROP TABLE IF EXISTS `retweet`;
 
 CREATE TABLE `retweet` (
 	`idretweet` bigint(20) NOT NULL,
