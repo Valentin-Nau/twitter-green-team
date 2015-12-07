@@ -1,15 +1,18 @@
 package com.m2i.poec.twittergreen.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ejb.EJBException;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletResponse;
 
 import com.m2i.poec.twittergreen.entity.Tweet;
 import com.m2i.poec.twittergreen.service.TweeterService;
@@ -48,7 +51,24 @@ public class ProfilePageBean implements Serializable{
 	
 	public List<Tweet> getTweets() {
 		LOGGER.info(userName);
-		return tweeterService.getUser(userName).getTweets();
+		try{
+			return tweeterService.getUser(userName).getTweets();
+		}
+		catch (Exception e)
+		{
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+            ExternalContext externalContext = facesContext.getExternalContext();                
+            externalContext.setResponseStatus(HttpServletResponse.SC_NOT_FOUND);
+            
+            try {
+				externalContext.dispatch("404.xhtml");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+            
+            facesContext.responseComplete();
+			return null;
+		}
 	}
 	
 	public String createTweet() {

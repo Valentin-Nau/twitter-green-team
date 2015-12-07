@@ -82,8 +82,8 @@ public class TweeterService {
 
 	public User getUser(String username) {
 		LOGGER.info("test pendant getUser");
-		User user = em.createQuery("SELECT u " + "FROM User AS u " + "WHERE username = :pusername", User.class)
-				.setParameter("pusername", username).getSingleResult();
+			User user = em.createQuery("SELECT u " + "FROM User AS u " + "WHERE username = :pusername", User.class)
+					.setParameter("pusername", username).getSingleResult();
 		LOGGER.info(user.toString());
 		return user;
 	}
