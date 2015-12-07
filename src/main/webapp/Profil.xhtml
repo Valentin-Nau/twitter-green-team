@@ -19,7 +19,7 @@
 <h:body>
 	<div id="global">
 		<div id="entete">
-				<h:form id="headerForm">
+				<h:form id="headerForm" rendered="#{profilePageBean.userName == sessionBean.user.username}">
 					<h:commandButton id="logOutButton" action="#{profilePageBean.disconnect}"
 						value="Déconnexion" />
 				</h:form>
