@@ -14,7 +14,6 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Tweet {
-	//TODO ajouter les noms de colonnes correspondentes
 	@Id
 	@Column(name="idtweet")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

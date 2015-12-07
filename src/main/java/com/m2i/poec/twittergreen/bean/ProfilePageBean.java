@@ -20,6 +20,11 @@ import com.m2i.poec.twittergreen.service.TweeterService;
 @Named
 @ViewScoped
 public class ProfilePageBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private String userName;
 	
 	private static final Logger LOGGER = Logger.getLogger(ProfilePageBean.class.getName());
