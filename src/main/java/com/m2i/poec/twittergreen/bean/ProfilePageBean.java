@@ -6,20 +6,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ejb.EJBException;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.m2i.poec.twittergreen.entity.Tweet;
-import com.m2i.poec.twittergreen.entity.User;
 import com.m2i.poec.twittergreen.service.TweeterService;
 
 @Named
 @ViewScoped
 public class ProfilePageBean implements Serializable{
 	private String userName;
-	
-	private User user;
 	
 	private static final Logger LOGGER = Logger.getLogger(ProfilePageBean.class.getName());
 	
@@ -53,7 +51,6 @@ public class ProfilePageBean implements Serializable{
 		return tweeterService.getUser(userName).getTweets();
 	}
 	
-	
 	public String createTweet() {
 		try {
 			LOGGER.info("contenu :" + content);
@@ -66,12 +63,10 @@ public class ProfilePageBean implements Serializable{
 			return null;
 		}
 	}
-
-	public User getUser() {
-		return user;
+	
+	public String disconnect() {
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "Login";
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
 }
