@@ -35,10 +35,6 @@ public class Tweet {
 		return creationDate;
 	}
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
 	public Long getId() {
 		return id;
 	}

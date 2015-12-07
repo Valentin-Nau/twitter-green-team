@@ -9,7 +9,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 
-import com.m2i.poec.twittergreen.bean.TweetCreateBean;
 import com.m2i.poec.twittergreen.entity.Tweet;
 import com.m2i.poec.twittergreen.entity.Users;
 import com.m2i.poec.twittergreen.exception.DuplicateEmailException;
@@ -23,7 +22,7 @@ public class TweeterService {
 	@PersistenceContext(unitName = "TwitterGreenPU")
 	private EntityManager em;
 
-	private static final Logger LOGGER = Logger.getLogger(TweetCreateBean.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(TweeterService.class.getName());
 
 	public void createTweet(Users user, String content) {
 
@@ -32,6 +31,7 @@ public class TweeterService {
 
 		tweet.setAuthor(user);
 
+		LOGGER.info(tweet.getAuthor().toString());
 		em.persist(tweet);
 		em.flush();
 		em.refresh(tweet);
@@ -77,5 +77,14 @@ public class TweeterService {
 	public List<Users> findAllUsers() {
 
 		return em.createQuery("SELECT DISTINCT u " + "FROM Users AS u", Users.class).getResultList();
+	}
+
+
+	public Users getUser(String username) {
+		LOGGER.info("test pendant getUser");
+		Users user = em.createQuery("SELECT u " + "FROM Users AS u " + "WHERE username = :pusername", Users.class)
+				.setParameter("pusername", username).getSingleResult();
+		LOGGER.info(user.toString());
+		return user;
 	}
 }

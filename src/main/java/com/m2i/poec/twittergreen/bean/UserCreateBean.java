@@ -32,10 +32,6 @@ public class UserCreateBean {
 	@Inject
     private SessionBean sessionBean;
     
-	/*public void setSessionBean(SessionBean sessionBean) {
-		this.sessionBean = sessionBean;
-	}*/
-
 	private String username;
 
 	private String password;
@@ -131,7 +127,7 @@ public class UserCreateBean {
 			sessionBean.setUser(user);
 			((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true)).setAttribute("user", user);
 
-			return "Profil.xhtml?faces-redirect=true";
+			return "Profil?faces-redirect=true";
 
 		} catch (DuplicateNameException e) {
 			message = DUPLICATE_USERNAME;
