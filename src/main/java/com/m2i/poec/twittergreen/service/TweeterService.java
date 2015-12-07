@@ -64,7 +64,7 @@ public class TweeterService {
 	public User logUser(String username, String password)
 			throws NoResultException, WrongPasswordException, IllegalArgumentException {
 		
-		User user = em.createQuery("SELECT u " + "FROM Users AS u " + "WHERE username = :pusername", User.class)
+		User user = em.createQuery("SELECT u " + "FROM User AS u " + "WHERE username = :pusername", User.class)
 				.setParameter("pusername", username).getSingleResult();
 		if (!PasswordBCrypt.verifyPassword(password, user.getPassword())) {
 			throw new WrongPasswordException();
@@ -76,13 +76,13 @@ public class TweeterService {
 
 	public List<User> findAllUsers() {
 
-		return em.createQuery("SELECT DISTINCT u " + "FROM Users AS u", User.class).getResultList();
+		return em.createQuery("SELECT DISTINCT u " + "FROM User AS u", User.class).getResultList();
 	}
 
 
 	public User getUser(String username) {
 		LOGGER.info("test pendant getUser");
-		User user = em.createQuery("SELECT u " + "FROM Users AS u " + "WHERE username = :pusername", User.class)
+		User user = em.createQuery("SELECT u " + "FROM User AS u " + "WHERE username = :pusername", User.class)
 				.setParameter("pusername", username).getSingleResult();
 		LOGGER.info(user.toString());
 		return user;
