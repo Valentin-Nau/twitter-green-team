@@ -28,20 +28,15 @@ public class UserCreateBean {
 
 	@Inject
 	private TweeterService tweeterService;
-	
+
 	@Inject
     private SessionBean sessionBean;
-    
+
 	private String username;
-
 	private String password;
-
 	private String confirmPassword;
-
 	private String email;
-
 	private String picture;
-
 	private String message;
 	private Validator validator = new Validator();
 	private static final String ERROR_USERNAME = "Veuillez entrer un Username avec les caractères suivant : [a-z] ou [A-Z] ou [0-9] ou \"_\"";
@@ -147,7 +142,7 @@ public class UserCreateBean {
 			message = "erreur inconnue";
 		}
 
-		return "User.xhtml";
+		return "Inscription.xhtml";
 	}
 
 }

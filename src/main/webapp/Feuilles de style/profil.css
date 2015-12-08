@@ -35,6 +35,18 @@ p {
 	border-color: #CCCCCC;
 }
 
+.retweetButton {
+    background-image: url("../Divers/retweet_icon.png");
+    width: 37px;
+    height: 34px;
+    border: none;
+}
+
+#principal textarea {
+    width: 300px;
+    height: 80px;
+}
+
 /* Navigation */
 
 #entete {

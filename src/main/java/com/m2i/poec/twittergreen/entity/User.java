@@ -25,6 +25,10 @@ public class User {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="author")
 	@OrderBy("creationDate DESC")
 	private List<Tweet> tweets;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="author")
+	@OrderBy("creationDate DESC")
+	private List<Retweet> retweets;
 
 	@Column(name = "username")
 	private String username;
@@ -52,6 +56,14 @@ public class User {
 
 	public void setTweets(List<Tweet> tweets) {
 		this.tweets = tweets;
+	}
+
+	public List<Retweet> getRetweets() {
+		return retweets;
+	}
+
+	public void setRetweets(List<Retweet> retweets) {
+		this.retweets = retweets;
 	}
 
 	public String getUsername() {
@@ -97,5 +109,12 @@ public class User {
 		newTweets.add(tweet);
 		newTweets.addAll(tweets);
 		tweets = newTweets;
+	}
+	
+	public void addReTweet(Retweet retweet) {
+		List<Retweet> newReTweets = new ArrayList<Retweet>();
+		newReTweets.add(retweet);
+		if (newReTweets != null ) newReTweets.addAll(retweets);
+		retweets = newReTweets;		
 	}
 }
