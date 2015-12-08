@@ -9,7 +9,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import com.m2i.poec.twittergreen.check.Validator;
-import com.m2i.poec.twittergreen.entity.Users;
+import com.m2i.poec.twittergreen.entity.User;
 import com.m2i.poec.twittergreen.exception.ConfirmPasswordNotValidException;
 import com.m2i.poec.twittergreen.exception.DuplicateEmailException;
 import com.m2i.poec.twittergreen.exception.DuplicateNameException;
@@ -28,20 +28,15 @@ public class UserCreateBean {
 
 	@Inject
 	private TweeterService tweeterService;
-	
+
 	@Inject
     private SessionBean sessionBean;
-    
+
 	private String username;
-
 	private String password;
-
 	private String confirmPassword;
-
 	private String email;
-
 	private String picture;
-
 	private String message;
 	private Validator validator = new Validator();
 	private static final String ERROR_USERNAME = "Veuillez entrer un Username avec les caractères suivant : [a-z] ou [A-Z] ou [0-9] ou \"_\"";
@@ -121,7 +116,7 @@ public class UserCreateBean {
 	public String createUser() {
 		try {
 			validator.check(username, password, confirmPassword, email, picture);
-			Users user = tweeterService.createUser(username, password, email, picture);
+			User user = tweeterService.createUser(username, password, email, picture);
 
 			tweeterService.logUser(username, password);
 			sessionBean.setUser(user);

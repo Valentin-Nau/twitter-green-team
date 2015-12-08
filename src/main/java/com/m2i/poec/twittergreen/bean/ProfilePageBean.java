@@ -1,25 +1,27 @@
 package com.m2i.poec.twittergreen.bean;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.ejb.EJBException;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
+import javax.servlet.http.HttpServletResponse;
 import com.m2i.poec.twittergreen.entity.Tweet;
-import com.m2i.poec.twittergreen.entity.Users;
 import com.m2i.poec.twittergreen.service.TweeterService;
 
 @Named
 @ViewScoped
 public class ProfilePageBean implements Serializable{
-	private String userName;
 
-	private Users user;
+	private static final long serialVersionUID = 1L;
+
+	private String userName;
 
 	private static final Logger LOGGER = Logger.getLogger(ProfilePageBean.class.getName());
 
@@ -50,9 +52,25 @@ public class ProfilePageBean implements Serializable{
 
 	public List<Tweet> getTweets() {
 		LOGGER.info(userName);
-		return tweeterService.getUser(userName).getTweets();
-	}
+		try{
+			return tweeterService.getUser(userName).getTweets();
+		}
+		catch (Exception e)
+		{
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+            ExternalContext externalContext = facesContext.getExternalContext();
+            externalContext.setResponseStatus(HttpServletResponse.SC_NOT_FOUND);
 
+            try {
+				externalContext.dispatch("404.xhtml");
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+
+            facesContext.responseComplete();
+			return null;
+		}
+	}
 
 	public String createTweet() {
 		try {
@@ -67,11 +85,9 @@ public class ProfilePageBean implements Serializable{
 		}
 	}
 
-	public Users getUser() {
-		return user;
+	public String disconnect() {
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "Login.xhtml?faces-redirect=true";
 	}
 
-	public void setUser(Users user) {
-		this.user = user;
-	}
 }

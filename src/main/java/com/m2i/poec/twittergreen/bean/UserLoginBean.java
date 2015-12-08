@@ -8,7 +8,7 @@ import javax.inject.Named;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 
-import com.m2i.poec.twittergreen.entity.Users;
+import com.m2i.poec.twittergreen.entity.User;
 import com.m2i.poec.twittergreen.exception.WrongPasswordException;
 import com.m2i.poec.twittergreen.service.TweeterService;
 import java.io.Serializable;
@@ -33,7 +33,6 @@ public class UserLoginBean implements Serializable {
 
 	private String username;
 	private String password;
-
 	private String errorName;
 	private String errorPass;
 
@@ -80,11 +79,9 @@ public class UserLoginBean implements Serializable {
 		try {
 			errorName = "";
 			errorPass = "";
-
-			Users user = tweeterService.logUser(username, password);
+			User user = tweeterService.logUser(username, password);
 			sessionBean.setUser(user);
 			((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true)).setAttribute("user", user);
-
 			return "Profil?username=" + user.getUsername() + "&faces-redirect=true";
 
 		} catch (EJBException e) {

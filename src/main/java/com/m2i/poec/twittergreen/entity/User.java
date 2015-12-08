@@ -12,9 +12,11 @@ import javax.persistence.Id;
 
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.Table;
 
 @Entity
-public class Users {
+@Table(name="users")
+public class User {
 	@Id
 	@Column(name = "iduser")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
