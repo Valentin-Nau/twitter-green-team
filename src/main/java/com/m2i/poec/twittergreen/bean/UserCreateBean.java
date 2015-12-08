@@ -142,7 +142,7 @@ public class UserCreateBean {
 			message = "erreur inconnue";
 		}
 
-		return "User.xhtml";
+		return "Inscription.xhtml";
 	}
 
 }
