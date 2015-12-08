@@ -18,17 +18,17 @@ import com.m2i.poec.twittergreen.service.TweeterService;
 @ViewScoped
 public class ProfilePageBean implements Serializable{
 	private String userName;
-	
+
 	private Users user;
-	
+
 	private static final Logger LOGGER = Logger.getLogger(ProfilePageBean.class.getName());
-	
+
 	@Inject
     private SessionBean sessionBean;
-	
+
 	@Inject
 	private TweeterService tweeterService;
-		
+
 	private String content ="";
 
 	public String getContent() {
@@ -39,21 +39,21 @@ public class ProfilePageBean implements Serializable{
 		LOGGER.info("setContent : " + content);
 		this.content = content;
 	}
-	
+
 	public String getUserName() {
 		return userName;
 	}
-	
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	public List<Tweet> getTweets() {
 		LOGGER.info(userName);
 		return tweeterService.getUser(userName).getTweets();
 	}
-	
-	
+
+
 	public String createTweet() {
 		try {
 			LOGGER.info("contenu :" + content);
