@@ -30,19 +30,16 @@ public class TweeterService {
 
 		Tweet tweet = new Tweet();
 		tweet.setContent(content);
-
 		tweet.setAuthor(user);
-
 		LOGGER.info(tweet.getAuthor().toString());
 		em.persist(tweet);
 		em.flush();
 		em.refresh(tweet);
-
 		user.addTweet(tweet);
 
 	}
 
-	public User createUser(String username, String password, String email, String picture) 
+	public User createUser(String username, String password, String email, String picture)
 		throws DuplicateNameException, DuplicateEmailException {
 
 		User user = new User();
@@ -65,7 +62,7 @@ public class TweeterService {
 
 	public User logUser(String username, String password)
 			throws NoResultException, WrongPasswordException, IllegalArgumentException {
-		
+
 		User user = em.createQuery("SELECT u " + "FROM User AS u " + "WHERE username = :pusername", User.class)
 				.setParameter("pusername", username).getSingleResult();
 		if (!PasswordBCrypt.verifyPassword(password, user.getPassword())) {

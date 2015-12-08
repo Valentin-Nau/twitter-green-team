@@ -14,12 +14,12 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Retweet {
-	
+
 	@Id
 	@Column(name="idretweet")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@OneToOne
 	@JoinColumn(name="idtweet")
 	private Tweet tweet;
@@ -39,7 +39,7 @@ public class Retweet {
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -51,7 +51,7 @@ public class Retweet {
 	public void setAuthor(User author) {
 		this.author = author;
 	}
-	
+
 	public Tweet getTweet() {
 		return tweet;
 	}
@@ -60,11 +60,15 @@ public class Retweet {
 		this.tweet = tweet;
 	}
 
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
 	@Override
 	public String toString() {
 		return "ReTweet [id=" + id + ", tweet=" + tweet + ", author=" + author + ", creationDate=" + creationDate + "]";
 	}
-	
-	
-	
+
+
+
 }
