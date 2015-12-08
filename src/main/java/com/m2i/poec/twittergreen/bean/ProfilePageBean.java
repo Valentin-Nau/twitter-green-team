@@ -15,6 +15,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 
 import com.m2i.poec.twittergreen.entity.Tweet;
+import com.m2i.poec.twittergreen.entity.User;
 import com.m2i.poec.twittergreen.service.TweeterService;
 
 @Named
@@ -42,7 +43,6 @@ public class ProfilePageBean implements Serializable{
 	}
 
 	public void setContent(String content) {
-		LOGGER.info("setContent : " + content);
 		this.content = content;
 	}
 	
@@ -55,7 +55,6 @@ public class ProfilePageBean implements Serializable{
 	}
 	
 	public List<Tweet> getTweets() {
-		LOGGER.info(userName);
 		try{
 			return tweeterService.getUser(userName).getTweets();
 		}
@@ -78,7 +77,6 @@ public class ProfilePageBean implements Serializable{
 	
 	public String createTweet() {
 		try {
-			LOGGER.info("contenu :" + content);
 			tweeterService.createTweet(sessionBean.getUser(), content);
 			return "Profil?username=" + sessionBean.getUser().getUsername() + "&faces-redirect=true";
 		} catch(EJBException ex) {
@@ -86,6 +84,21 @@ public class ProfilePageBean implements Serializable{
 			// TODO décortiquer l'exception, voir ou est l'erreur, préparer un message d'erreur adéquat
 			LOGGER.log(Level.INFO, "oups...", ex);
 			return null;
+		}
+	}
+	
+	public void createReTweet(User user, Tweet tweet) {
+
+		try {
+			
+			tweeterService.reTweet(sessionBean.getUser(), tweet);
+			
+		} catch (EJBException ex) {
+
+			// TODO dÃ©cortiquer l'exception, voir ou est l'erreur, prÃ©parer un
+			// message d'erreur adÃ©quat
+			LOGGER.log(Level.INFO, "oups...", ex);
+
 		}
 	}
 	

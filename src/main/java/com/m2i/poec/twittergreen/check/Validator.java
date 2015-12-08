@@ -27,11 +27,9 @@ public class Validator {
 		matcher = pattern.matcher(username);
 		while(matcher.find()){
 			++i;
-			LOGGER.log(Level.INFO,"dans le while");
 		}
 		
 		if(username == null || i == 0 || i != username.length()){
-			LOGGER.log(Level.INFO,"exception username");
 			throw new UsernameNotValidException();
 		}
 		
@@ -39,22 +37,18 @@ public class Validator {
 		pattern = Pattern.compile(REGEX_PASSWORD);
 		matcher = pattern.matcher(password);
 		if(null == password || !matcher.find() || password.length() <= 7){
-			LOGGER.log(Level.INFO,"Exception password");
 			throw new PasswordNotValidException();
 		}
 		
 		if (null == confirmPassword || !password.equals(confirmPassword)) {
-			LOGGER.log(Level.INFO,"exception confirm");
 			throw new ConfirmPasswordNotValidException();
 		}
 		
 		if(null == email || (email.indexOf("@") < 1 || email.indexOf("@") == email.length() - 1)){
-			LOGGER.log(Level.INFO,"exception email");
 			throw new EmailNotValidException();
 		}
 		
 		if(picture.length() == 0 || null == picture){
-			LOGGER.log(Level.INFO,"exception picture");
 			throw new PictureNotValidException();
 		}
 	

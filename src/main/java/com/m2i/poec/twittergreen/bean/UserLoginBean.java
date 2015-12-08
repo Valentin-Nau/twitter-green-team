@@ -69,7 +69,6 @@ public class UserLoginBean implements Serializable {
 	}
 
 	public void logUserAfterSigIn(String username, String password) {
-		LOGGER.info("On passe dans logUserAfterSignIn");
 		this.username = username;
 		this.password = password;
 		logUser();
