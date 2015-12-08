@@ -20,10 +20,11 @@
 <h:body>
 	<div id="global">
 		<div id="entete">
-				<h:form id="headerForm" rendered="#{profilePageBean.userName == sessionBean.user.username}">
-					<h:commandButton id="logOutButton" action="#{profilePageBean.disconnect}"
-						value="Déconnexion" />
-				</h:form>
+			<h:form id="headerForm"
+				rendered="#{profilePageBean.userName == sessionBean.user.username}">
+				<h:commandButton id="logOutButton"
+					action="#{profilePageBean.disconnect}" value="Déconnexion" />
+			</h:form>
 		</div>
 		<div id="centre">
 			<div id="navigation">#{profilePageBean.userName}</div>
@@ -53,6 +54,11 @@
 							<h:link value="#{tweet.author.username}"
 								outcome="Profil.xhtml?username=#{tweet.author.username}" />
 							: #{tweet.creationDate} <br /> #{tweet.content}
+							<h:form>
+								<h:commandButton styleClass="retweetButton"
+									action="#{ profilePageBean.createReTweet(sessionBean.user, tweet) }">
+								</h:commandButton>
+							</h:form>
 						</p>
 					</c:forEach>
 				</h:panelGroup>

@@ -1,5 +1,5 @@
 package com.m2i.poec.twittergreen.bean;
-import java.util.logging.Logger;
+
 import javax.ejb.EJBException;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
-
 import com.m2i.poec.twittergreen.entity.User;
 import com.m2i.poec.twittergreen.exception.WrongPasswordException;
 import com.m2i.poec.twittergreen.service.TweeterService;
@@ -18,12 +17,8 @@ import java.io.Serializable;
 public class UserLoginBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private static final Logger LOGGER = Logger.getLogger(UserCreateBean.class.getName());
-
 	private static final String ERROR_NAME = "Le nom d'utilisateur n'existe pas";
 	private static final String ERROR_PASS = "Le mot de passe est incorrect";
-
 
 	@Inject
     private SessionBean sessionBean;
@@ -69,7 +64,6 @@ public class UserLoginBean implements Serializable {
 	}
 
 	public void logUserAfterSigIn(String username, String password) {
-		LOGGER.info("On passe dans logUserAfterSignIn");
 		this.username = username;
 		this.password = password;
 		logUser();
