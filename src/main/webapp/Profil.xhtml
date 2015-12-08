@@ -44,14 +44,19 @@
 					</h:commandButton>
 				</h:form>
 				<h:panelGroup id="tweets">
-					<c:forEach items="#{profilePageBean.tweets}" var="tweet">
+					<c:forEach items="#{profilePageBean.displayedTweets}" var="displayedTweet">
 						<p>
-							<h:link value="#{tweet.author.username}"
-								outcome="Profil.xhtml?username=#{tweet.author.username}" />
-							: #{tweet.creationDate} <br /> #{tweet.content}
-							<h:form>
+							<h:link value="#{displayedTweet.author}"
+								outcome="Profil.xhtml?username=#{displayedTweet.author}" rendered="#{displayedTweet.originalAuthor==null}" />
+								
+							<h:link value="#{displayedTweet.originalAuthor}"
+								outcome="Profil.xhtml?username=#{displayedTweet.originalAuthor}" rendered="#{displayedTweet.originalAuthor!=null}" />
+								
+							: #{displayedTweet.createdOn} <br /> #{displayedTweet.content}
+							
+							<h:form rendered="#{profilePageBean.isRetweetable(sessionBean.user, displayedTweet)}">
 								<h:commandButton styleClass="retweetButton"
-									action="#{ profilePageBean.createReTweet(sessionBean.user, tweet) }">
+									action="#{ profilePageBean.createReTweet(sessionBean.user, displayedTweet) }">
 								</h:commandButton>
 							</h:form>
 						</p>

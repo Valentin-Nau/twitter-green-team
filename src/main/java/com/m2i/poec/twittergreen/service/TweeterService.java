@@ -1,6 +1,5 @@
 package com.m2i.poec.twittergreen.service;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
 import java.util.Objects;
@@ -93,6 +92,8 @@ public class TweeterService {
 			retweet.setTweet(tweet);
 			
 			retweet.setAuthor(retweetUser);
+			
+			LOGGER.info(retweet.toString());
 	
 			em.persist(retweet);
 	
@@ -101,7 +102,7 @@ public class TweeterService {
 		}
 	}
 	
-	private boolean retweetable(User retweetUser, Tweet tweet) {
+	public boolean retweetable(User retweetUser, Tweet tweet) {
 
 		// L'utilisateur ne retweete son tweet.
 		if (retweetUser.getId() == tweet.getAuthor().getId()) {
@@ -138,5 +139,9 @@ public class TweeterService {
 		
 		return retweet;
 		
+	}
+
+	public Tweet findATweet(Long id) {
+		return em.find(Tweet.class, id);
 	}
 }
