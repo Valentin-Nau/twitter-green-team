@@ -1,0 +1,28 @@
+@CHARSET "ISO-8859-1";
+
+form {
+    /* Pour le centrer dans la page */
+    margin: 0 auto;
+    width: 370px;
+    /* Pour voir les limites du formulaire */
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+    background-color : rgba(242,226,202,0.7); 
+}
+
+body{
+	background-image : url("../Divers/tweet.png");
+	background-size: cover;
+}
+
+.bouton {
+    background-color: #FEAA00; /* Green */
+    border: 2px solid black;
+    color: black;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+   	border-radius: 12px;
+}

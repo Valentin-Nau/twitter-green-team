@@ -17,6 +17,8 @@
 	<link rel="stylesheet" type="text/css"
 		href="Feuilles de style/profil.css" media="screen" />
 </h:head>
+
+
 <h:body>
 	<div id="global">
 		<div id="entete">
@@ -33,7 +35,8 @@
 				<h:form id="tweetform"
 					rendered="#{profilePageBean.userName == sessionBean.user.username}">
 
-					<h:inputTextarea id="tweetcontent" value="#{profilePageBean.content}" styleClass="text-input">
+					<h:inputTextarea id="tweetcontent"
+						value="#{profilePageBean.content}" styleClass="text-input">
 
 						<f:validateLength minimum="1" maximum="140" />
 					</h:inputTextarea>
@@ -53,10 +56,12 @@
 						var="displayedTweet">
 						<p>
 							<h:panelGroup rendered="#{displayedTweet.originalAuthor!=null}">
-								
-								<h:link value="#{displayedTweet.author}" outcome="Profil.xhtml?username=#{displayedTweet.author}" /> à retweeté	<br/>							
 
-								<h:link value="#{displayedTweet.originalAuthor}" outcome="Profil.xhtml?username=#{displayedTweet.originalAuthor}" />									
+								<h:link value="#{displayedTweet.author}"
+									outcome="Profil.xhtml?username=#{displayedTweet.author}" /> à retweeté	<br />
+
+								<h:link value="#{displayedTweet.originalAuthor}"
+									outcome="Profil.xhtml?username=#{displayedTweet.originalAuthor}" />
 							</h:panelGroup>
 
 							<h:link value="#{displayedTweet.author}"
