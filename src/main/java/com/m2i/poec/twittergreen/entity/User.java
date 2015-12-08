@@ -107,7 +107,7 @@ public class User {
 	public void addTweet(Tweet tweet) {
 		List<Tweet> newTweets = new ArrayList<Tweet>();
 		newTweets.add(tweet);
-		newTweets.addAll(tweets);
+		if (tweets != null) newTweets.addAll(tweets);
 		tweets = newTweets;
 	}
 	
