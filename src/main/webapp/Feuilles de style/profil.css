@@ -5,7 +5,6 @@
    http://creativecommons.org/licenses/by/2.0/fr/
    ============================================== */
 
-
 /* --- COULEURS --- */
 
 /* Note: vous pouvez modifier simplement l'aspect de ce gabarit en modifiant
@@ -16,15 +15,18 @@
 
 /* Général */
 body {
-	color: #181A12;
-	background: #F2F2F2;
+	background-image: url("C:/Users/Administrateur/TwitterGreen/TwitterGreen/src/main/webapp/Divers/tweet.png");
+	background-attachment: fixed;
 }
+
 a {
 	color: #FF6533;
 }
+
 a:hover, a:focus {
 	color: #FF4C00;
 }
+
 strong {
 	color: #A1B55D;
 }
@@ -35,21 +37,34 @@ p {
 	border-color: #CCCCCC;
 }
 
-/* Navigation */
+.retweetButton {
+	background-image: url("../Divers/retweet_icon.png");
+	width: 37px;
+	height: 34px;
+	border: none;
+}
 
+#principal textarea {
+	width: 300px;
+	height: 80px;
+}
+
+/* Navigation */
 #entete {
 	background: #F9F9F9;
 }
+
 #navigation {
 	background: #F5F5F5;
-	
 	border-style: solid;
 	border-width: 1px;
 	border-color: #CCCCCC;
 }
+
 #navigation a {
 	color: #FF6533;
 }
+
 #navigation a:hover, #navigation a:focus {
 	background: #000000;
 }
@@ -58,19 +73,20 @@ p {
 #principal {
 	color: #0D0D12;
 	background: #F8F8F8;
-	
-	text-align: center ;
-	
+	text-align: center;
 	border-style: solid;
 	border-width: 1px;
 	border-color: #CCCCCC;
 }
+
 #principal a {
 	color: #332510;
 }
+
 #principal a:hover, #principal a:focus {
 	color: #6E5122;
 }
+
 #principal strong {
 	color: #0D0D12;
 }
@@ -78,36 +94,35 @@ p {
 /* Contenu secondaire */
 #secondaire {
 	background: #F5F5F5;
-	
 	border-style: solid;
 	border-width: 1px;
 	border-color: #CCCCCC;
 }
 
-
-
 /* --- POSITIONNEMENT --- */
 
 /* Page */
 body {
-	padding: 20px 30px;
+	background-image: url("../Divers/tweet.png");
 }
 
 /* En-tête */
 #entete {
 	padding: 20px 0;
 }
+
 #entete h1 {
 	margin: 0;
 }
+
 #entete h1 img {
 	float: left;
 	margin: 7px 20px 10px 0;
 }
+
 #entete .sous-titre {
 	margin: 4px 0 15px 0;
 }
-
 /* Bloc central */
 #centre {
 	position: relative; /* Voir -> Note 1 */
@@ -121,11 +136,13 @@ body {
 	left: 50px;
 	width: 180px;
 }
+
 #navigation ul {
 	margin: 0;
 	padding: 20px 10px 20px 10px;
 	list-style: none;
 }
+
 #navigation a {
 	display: block;
 	height: 1%;
@@ -141,9 +158,11 @@ body {
 	margin-right: 290px; /* -> 2 */
 	padding: 10px 20px;
 }
-#principal > :first-child {
+
+#principal>:first-child {
 	margin-top: 10px;
 }
+
 #principal p, #principal li {
 	line-height: 1.5;
 }
@@ -163,7 +182,6 @@ body {
 	font-size: .85em;
 	text-align: left;
 }
-
 
 /* --- NOTES ---
 

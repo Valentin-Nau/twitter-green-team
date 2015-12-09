@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.m2i.poec.twittergreen.entity.User;
 
-@WebFilter("/Login.xhtml")
-public class LoginFilter implements Filter {
+@WebFilter("/Inscription.xhtml")
+public class InscriptionFilter implements Filter {
 
 	private FilterConfig fc;
 

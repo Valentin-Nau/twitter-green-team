@@ -12,8 +12,10 @@ import javax.persistence.Id;
 
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="users")
 public class User {
 	@Id
 	@Column(name = "iduser")
@@ -23,6 +25,10 @@ public class User {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="author")
 	@OrderBy("creationDate DESC")
 	private List<Tweet> tweets;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="author")
+	@OrderBy("creationDate DESC")
+	private List<Retweet> retweets;
 
 	@Column(name = "username")
 	private String username;
@@ -50,6 +56,14 @@ public class User {
 
 	public void setTweets(List<Tweet> tweets) {
 		this.tweets = tweets;
+	}
+
+	public List<Retweet> getRetweets() {
+		return retweets;
+	}
+
+	public void setRetweets(List<Retweet> retweets) {
+		this.retweets = retweets;
 	}
 
 	public String getUsername() {
@@ -93,7 +107,14 @@ public class User {
 	public void addTweet(Tweet tweet) {
 		List<Tweet> newTweets = new ArrayList<Tweet>();
 		newTweets.add(tweet);
-		newTweets.addAll(tweets);
+		if (tweets != null) newTweets.addAll(tweets);
 		tweets = newTweets;
+	}
+	
+	public void addReTweet(Retweet retweet) {
+		List<Retweet> newReTweets = new ArrayList<Retweet>();
+		newReTweets.add(retweet);
+		if (newReTweets != null ) newReTweets.addAll(retweets);
+		retweets = newReTweets;		
 	}
 }
