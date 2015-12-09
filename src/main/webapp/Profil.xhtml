@@ -76,7 +76,7 @@
 
 							<h:form
 								rendered="#{profilePageBean.userName != sessionBean.user.username &amp;&amp; profilePageBean.isRetweetable(sessionBean.user, displayedTweet)}">
-								<h:commandButton styleClass="retweetButton"
+								<h:commandButton styleClass="retweetButton" title="Retweeter"
 									action="#{ profilePageBean.createReTweet(sessionBean.user, displayedTweet) }">
 								</h:commandButton>
 							</h:form>
