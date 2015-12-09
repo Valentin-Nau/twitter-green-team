@@ -49,6 +49,8 @@ public class TweeterService {
 		user.setUsername(username);
 		try {
 			em.persist(user);
+			em.flush();
+			em.refresh(user);
 		} catch (PersistenceException e) {
 			if(e.getCause().getCause().getMessage().contains("username")){
 				throw new DuplicateNameException();
