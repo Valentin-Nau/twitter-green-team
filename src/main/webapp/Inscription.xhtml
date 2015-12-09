@@ -3,60 +3,65 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:pf="http://primefaces.org/ui">
+	xmlns:pf="http://primefaces.org/ui"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
-	<h:title> Nouveau sur Twitter </h:title>
+
+
+	<link rel="stylesheet" type="text/css"
+		href="Feuilles de style/Inscription.css" media="screen" />
+		<br />
+	<center>
+		<h1> Nouveau sur Twitter ?</h1>
+	</center>
+
 </h:head>
 <h:body>
-	<br />
-	<br />
-	<h:form>
-		<h:panelGrid columns="4">
 
-			<h:outputLabel for="username" value="Username" />
-			<h:inputText id="username" value="#{userCreateBean.username}" />
+
+	<br />
+	<br />
+	<center>
+	<h:form>
+	<center>
+		<h:panelGrid columns="4">
+			
+			<h:outputText value="" for="username" />
+			<h:inputText id="username" value="#{userCreateBean.username}" p:placeholder="Username" />
 			<h:message for="username" value="#{userCreateBean.message}" />
 			<br />
 			<br />
 
-
-			<h:outputLabel for="password" value="Password" />
-			<h:inputSecret id="password" value="#{userCreateBean.password}" />
+			<h:outputText value="" for="password" />
+			<h:inputSecret id="password" value="#{userCreateBean.password}" p:placeholder="Password"/>
 			<h:message for="password" value="#{userCreateBean.message}" />
 			<br />
 			<br />
 
-
-			<h:outputLabel for="password_confirm" value="Confirm password" />
+			<h:outputText value="" for="password_confirm" />
 			<h:inputSecret id="password_confirm"
-				value="#{userCreateBean.confirmPassword}" />
+				value="#{userCreateBean.confirmPassword}" p:placeholder="Confirm Password"/>
 			<h:message for="password_confirm" value="#{userCreateBean.message}" />
 			<br />
 			<br />
 
-
-			<h:outputLabel for="email" value="Email" />
-			<h:inputText id="email" value="#{userCreateBean.email}" />
+			<h:outputText value="" for="email" />
+			
+			<h:inputText id="email" value="#{userCreateBean.email}" p:placeholder="Email"/>
 			<h:message for="email" value="#{userCreateBean.message}" />
 			<br />
 			<br />
-			
-<!-- 			<h:outputText for="picture" value="Choisissez votre photo de profil" /> -->
-<!-- 			<input type="file" name="FileName" id="FileName" /> -->
-<!-- 			<pf:fileUpload allowTypes="/(\.|\/)(gif|jpe?g|png)$/" mode="simple" value="test"/> -->
-			<!-- 			<h:outputLabel for="picture" value="Picture" /> -->
-			<!-- 			<h:inputText id="picture" value="#{userCreateBean.picture}" /> -->
-			<!-- 			<h:message for="picture" value="#{userCreateBean.message}" /> -->
-			<!-- 			<br /> -->
-			<!-- 			<br /> -->
 
 		</h:panelGrid>
+		
 		<br />
 		<h:outputText value="#{userCreateBean.message}" />
 		<br />
-		<h:commandButton action="#{userCreateBean.createUser}"
-			value="S'inscrire sur tweet" />
-
+			 
+				<h:commandButton action="#{userCreateBean.createUser}"
+					value="S'inscrire sur Tweeter" class="bouton"/>
+		</center>
 	</h:form>
+	</center>
 </h:body>
 </html>

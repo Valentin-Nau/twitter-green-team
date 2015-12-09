@@ -17,6 +17,8 @@
 	<link rel="stylesheet" type="text/css"
 		href="Feuilles de style/profil.css" media="screen" />
 </h:head>
+
+
 <h:body>
 	<div id="global">
 		<div id="entete">
@@ -27,17 +29,22 @@
 			</h:form>
 		</div>
 		<div id="centre">
-			<div id="navigation">#{profilePageBean.userName}</div>
+			<div id="navigation">
+				Profil de #{profilePageBean.userName} <br/>
+				<h:link value="Accéder à ma page de profil" outcome="Profil.xhtml?username=#{sessionBean.user.username}"
+				rendered="#{profilePageBean.userName != sessionBean.user.username}" />
+				</div>
 			<div id="principal">
 
-				<h:form id="tweetform" rendered="#{profilePageBean.userName == sessionBean.user.username}">
-				
-					<h:inputTextarea id="tweetcontent" value="#{profilePageBean.content}"
-						styleClass="text-input">
+				<h:form id="tweetform"
+					rendered="#{profilePageBean.userName == sessionBean.user.username}">
+
+					<h:inputTextarea id="tweetcontent"
+						value="#{profilePageBean.content}" styleClass="text-input">
 
 						<f:validateLength minimum="1" maximum="140" />
 					</h:inputTextarea>
-					
+
 					<br />
 					<h:message for="tweetcontent" />
 					<br />
@@ -49,14 +56,28 @@
 
 				</h:form>
 				<h:panelGroup id="tweets">
-					<c:forEach items="#{profilePageBean.tweets}" var="tweet">
+					<c:forEach items="#{profilePageBean.displayedTweets}"
+						var="displayedTweet">
 						<p>
-							<h:link value="#{tweet.author.username}"
-								outcome="Profil.xhtml?username=#{tweet.author.username}" />
-							: #{tweet.creationDate} <br /> #{tweet.content}
-							<h:form>
+							<h:panelGroup rendered="#{displayedTweet.originalAuthor!=null}">
+
+								<h:link value="#{displayedTweet.author}"
+									outcome="Profil.xhtml?username=#{displayedTweet.author}" /> à retweeté	<br />
+
+								<h:link value="#{displayedTweet.originalAuthor}"
+									outcome="Profil.xhtml?username=#{displayedTweet.originalAuthor}" />
+							</h:panelGroup>
+
+							<h:link value="#{displayedTweet.author}"
+								outcome="Profil.xhtml?username=#{displayedTweet.author}"
+								rendered="#{displayedTweet.originalAuthor==null}" />
+
+							: #{displayedTweet.createdOn} <br /> #{displayedTweet.content}
+
+							<h:form
+								rendered="#{profilePageBean.userName != sessionBean.user.username &amp;&amp; profilePageBean.isRetweetable(sessionBean.user, displayedTweet)}">
 								<h:commandButton styleClass="retweetButton"
-									action="#{ profilePageBean.createReTweet(sessionBean.user, tweet) }">
+									action="#{ profilePageBean.createReTweet(sessionBean.user, displayedTweet) }">
 								</h:commandButton>
 							</h:form>
 						</p>

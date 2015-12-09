@@ -1,6 +1,5 @@
 package com.m2i.poec.twittergreen.check;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,6 +16,7 @@ public class Validator {
 	private static Matcher matcher;
 	private static final String REGEX_PASSWORD = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])";
 	private static final String REGEX_USERNAME = "[a-z]|[A-Z]|[0-9]|[_]";
+	private static final String REGEX_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 	public void check(String username, String password, String confirmPassword, String email, String picture) throws UsernameNotValidException, PasswordNotValidException, EmailNotValidException, ConfirmPasswordNotValidException, PictureNotValidException {
 
@@ -43,7 +43,10 @@ public class Validator {
 			throw new ConfirmPasswordNotValidException();
 		}
 
-		if(null == email || (email.indexOf("@") < 1 || email.indexOf("@") == email.length() - 1)){
+		pattern = Pattern.compile(REGEX_EMAIL);
+		matcher = pattern.matcher(email);
+		
+		if(null == email || !matcher.find()){
 			throw new EmailNotValidException();
 		}
 
