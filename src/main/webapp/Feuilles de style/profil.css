@@ -15,8 +15,8 @@
 
 /* Général */
 body {
-	color: #181A12;
-	background: #F2F2F2;
+	background-image: url("C:/Users/Administrateur/TwitterGreen/TwitterGreen/src/main/webapp/Divers/tweet.png");
+	background-attachment: fixed;
 }
 
 a {
