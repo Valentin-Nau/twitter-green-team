@@ -27,13 +27,13 @@
 				<h:commandButton id="logOutButton"
 					action="#{profilePageBean.disconnect}" value="Déconnexion" />
 			</h:form>
+
+			<h:link value="Accéder à ma page de profil"
+				outcome="Profil.xhtml?username=#{sessionBean.user.username}"
+				rendered="#{sessionBean.user != null &amp;&amp; profilePageBean.userName != sessionBean.user.username}" />
 		</div>
 		<div id="centre">
-			<div id="navigation">
-				Profil de #{profilePageBean.userName} <br/>
-				<h:link value="Accéder à ma page de profil" outcome="Profil.xhtml?username=#{sessionBean.user.username}"
-				rendered="#{profilePageBean.userName != sessionBean.user.username}" />
-				</div>
+			<div id="navigation">Profil de #{profilePageBean.userName}</div>
 			<div id="principal">
 
 				<h:form id="tweetform"
