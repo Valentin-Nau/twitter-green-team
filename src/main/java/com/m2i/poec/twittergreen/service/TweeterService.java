@@ -91,9 +91,7 @@ public class TweeterService {
 			retweet.setTweet(tweet);
 			
 			retweet.setAuthor(retweetUser);
-			
-			LOGGER.info(retweet.toString());
-	
+				
 			em.persist(retweet);
 	
 			retweetUser.addReTweet(retweet);

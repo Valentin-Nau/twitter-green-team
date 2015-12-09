@@ -116,6 +116,9 @@ public class ProfilePageBean implements Serializable{
 	}
 	
 	public boolean isRetweetable(User user, DisplayedTweet displayedtweet){
+		if (user == null) {
+			return false;
+		}
 		Tweet tweet = tweeterService.findATweet(displayedtweet.getId());
 		return tweeterService.retweetable(user, tweet);
 	}
